@@ -57,3 +57,25 @@
 - Basics
 - Navigations
 - Advanced
+
+# Explanations
+
+## Layout Components
+
+They are focused on organizing other components within a web page. They are responsible for the overall structure and layout of the page, but they do not contain any business logic or state. Examples of layout components include headers, footers, sidebars, and grid systems.
+
+* Our components should function independently of the placement of the page.
+
+### Split screen layout
+
+
+### Lists
+
+### Modals
+
+
+
+# Step by Step
+
+1. Create a new React project using `create-react-app` (npx create-next-app@latest).
+2. Install jest as test library (npm install jest).
