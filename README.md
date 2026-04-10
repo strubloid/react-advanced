@@ -1,5 +1,11 @@
 # react-advanced
 
+## Naming Conventions
+
+- PascalCase : Folders
+- camelCase : Files
+- kebab-case : Modules
+
 ## What am I learning here?
 
 - Layout Components
