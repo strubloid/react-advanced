@@ -4,7 +4,7 @@ import { SplitScreen } from "@components/split-screen/SplitScreen";
 const LeftSideComponent = () => {
     return (
         <>
-            <h2>I am Left</h2>
+            <h2 style={{ backgroundColor: "red" }}>I am Left</h2>
         </>
     );
 };
@@ -12,7 +12,7 @@ const LeftSideComponent = () => {
 const RightSideComponent = () => {
     return (
         <>
-            <h2>I am Right</h2>
+            <h2 style={{ backgroundColor: "blue" }}>I am Right</h2>
         </>
     );
 };
@@ -21,7 +21,7 @@ export default function Home() {
     return (
         <>
             <header>
-                <h2>Brazucas</h2>
+                <h2 style={{ textAlign: "center", margin: "20px 0px" }}>Brazucas</h2>
             </header>
             <SplitScreen Left={LeftSideComponent} Right={RightSideComponent} />
         </>
