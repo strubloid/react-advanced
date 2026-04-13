@@ -1,4 +1,3 @@
-"use client";
 import type { UserType } from "@/app/data/Users";
 
 export const UserInfo = ({ user }: { user: UserType | null }) => {

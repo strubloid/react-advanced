@@ -1,4 +1,3 @@
-"use client";
 import type { BookType } from "@/app/data/Books";
 
 export const BookInfo = ({ book }: { book: BookType | null }) => {
