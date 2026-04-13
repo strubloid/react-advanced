@@ -6,6 +6,7 @@ import { LargeAuthorListItems } from "@components/autors/LargeListItems";
 import { SmallBookListItems } from "@components/books/SmallListItems";
 import { LargeBookListItems } from "@components/books/LargeListItems";
 import { NormalList } from "@components/lists/NormalList";
+import { NumberedList } from "@components/lists/NumberedList";
 import { books } from "./data/Books";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
@@ -28,8 +29,10 @@ export default function Home() {
                     <NormalList items={authors} sourceName="author" ItemComponent={LargeAuthorListItems} />
                 </LeftSideComponent>
                 <RightSideComponent>
-                    <NormalList items={books} sourceName="book" ItemComponent={SmallBookListItems} />
-                    <NormalList items={books} sourceName="book" ItemComponent={LargeBookListItems} />
+                    {/* <NormalList items={books} sourceName="book" ItemComponent={SmallBookListItems} />
+                    <NormalList items={books} sourceName="book" ItemComponent={LargeBookListItems} /> */}
+                    <NumberedList items={books} sourceName="book" ItemComponent={SmallBookListItems} />
+                    <NumberedList items={books} sourceName="book" ItemComponent={LargeBookListItems} />
                 </RightSideComponent>
             </SplitScreen>
         </>
