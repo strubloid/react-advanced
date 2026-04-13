@@ -1,5 +1,5 @@
-import { AuthorType } from "@/app/data/Authors";
 import { BookType } from "@/app/data/Books";
+import { UserType } from "@/app/data/Users";
 import express from "express";
 
 // Create an Express application
@@ -8,37 +8,87 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-let currentUser = {
+let currentUser: UserType = {
+    id: 1,
     name: "Sarah Waters",
     age: 55,
     country: "United Kingdom",
     books: ["Fingersmith", "The Night Watch"],
 };
 
-let autors: AuthorType[] = [];
-let books: BookType[] = [];
+let users: UserType[] = [
+    {
+        id: 1,
+        name: "Sarah Waters",
+        age: 55,
+        country: "United Kingdom",
+        books: ["Fingersmith", "The Night Watch"],
+    },
+    {
+        id: 2,
+        name: "Haruki Murakami",
+        age: 71,
+        country: "Japan",
+        books: ["Norwegian Wood", "Kafka on the Shore"],
+    },
+    {
+        id: 3,
+        name: "Chimamanda Ngozi Adichie",
+        age: 43,
+        country: "Nigeria",
+        books: ["Half of a Yellow Sun", "Americanah"],
+    },
+];
+let books: BookType[] = [
+    {
+        id: 1,
+        title: "To Kill a Mockingbird",
+        pages: 281,
+        author: "Harper Lee",
+        price: 12.99,
+    },
+    {
+        id: 2,
+        title: "The Catcher in the Rye",
+        pages: 224,
+        author: "J.D. Salinger",
+        price: 9.99,
+    },
+    {
+        id: 3,
+        title: "The Little Prince",
+        pages: 85,
+        author: "Antoine de Saint-Exupéry",
+        price: 7.99,
+    },
+];
 
+// First test how to get the current user
 app.get("/current-user", (req, res) => res.json(currentUser));
 
-app.get("/autors/:id", (req, res) => {
+// Getting a user by it's own ID
+app.get("/users/:id", (req, res) => {
     const { id } = req.params;
-    console.log(id);
-    res.json(autors.find((user) => user.id === Number(id)));
+    res.json(users.find((user) => user.id === Number(id)));
 });
 
-app.get("/autors", (req, res) => res.json(autors));
+// Getting all users
+app.get("/users", (req, res) => res.json(users));
 
-app.post("/autors/:id", (req, res) => {
+// Editing a user by it's own ID
+app.post("/users/:id", (req, res) => {
     const { id } = req.params;
     const { user: editedUser } = req.body;
 
-    autors = autors.map((user) => (user.id === Number(id) ? editedUser : user));
+    users = users.map((user) => (user.id === Number(id) ? editedUser : user));
 
-    res.json(autors.find((user) => user.id === Number(id)));
+    res.json(users.find((user) => user.id === Number(id)));
 });
 
+// Getting all books
 app.get("/books", (req, res) => res.json(books));
 
+// Getting a book by it's own ID
 app.get("/books/:id", (req, res) => {
     const { id } = req.params;
     res.json(books.find((book) => book.id === Number(id)));

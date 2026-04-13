@@ -11,6 +11,7 @@ import { books } from "./data/Books";
 import { BasicModal } from "./components/modals/BasicModal";
 import { CurrentUserLoader } from "./components/user/CurrentUserLoader";
 import { UserInfo } from "./components/user/UserInfo";
+import { UserLoader } from "./components/user/UserLoader";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -26,12 +27,13 @@ export default function Home() {
             <header>
                 <h2 style={{ textAlign: "center", margin: "20px 0px" }}>Brazucas</h2>
             </header>
-            <CurrentUserLoader>
-                <UserInfo user={null} />
-            </CurrentUserLoader>
 
             <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSideComponent>
+                    <CurrentUserLoader>
+                        <UserInfo user={null} />
+                    </CurrentUserLoader>
+
                     <NormalList items={authors} sourceName="author" ItemComponent={SmallAuthorListItems} />
                     <BasicModal>
                         {authors.map((author) => (
@@ -40,6 +42,9 @@ export default function Home() {
                     </BasicModal>
                 </LeftSideComponent>
                 <RightSideComponent>
+                    <UserLoader userId="2">
+                        <UserInfo user={null} />
+                    </UserLoader>
                     <NumberedList items={books} sourceName="book" ItemComponent={SmallBookListItems} />
                     <BasicModal>
                         {books.map((book) => (
