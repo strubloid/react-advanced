@@ -91,7 +91,16 @@ app.get("/books", (req, res) => res.json(books));
 // Getting a book by it's own ID
 app.get("/books/:id", (req, res) => {
     const { id } = req.params;
-    res.json(books.find((book) => book.id === Number(id)));
+
+    let bookCollection = books.find((book) => book.id === Number(id));
+
+    // in case things arent able to find the book, we return a 404 status code with a message
+    if (!bookCollection) {
+        res.status(404).json({ message: "Book not found" });
+        return;
+    }
+
+    res.json(bookCollection);
 });
 
 let SERVER_PORT = 9090;

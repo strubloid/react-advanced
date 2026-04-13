@@ -14,6 +14,7 @@ import { UserInfo } from "./components/user/UserInfo";
 import { UserLoader } from "./components/user/UserLoader";
 
 import { ResourceLoader } from "./components/loaders/ResourceLoader";
+import { BookInfo } from "./components/books/BookInfo";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -42,8 +43,8 @@ export default function Home() {
                     </BasicModal>
                 </LeftSideComponent>
                 <RightSideComponent>
-                    <ResourceLoader resourceUrl={"/api/users/1"} ResourceName={"user"}>
-                        <UserInfo user={null} />
+                    <ResourceLoader resourceUrl={"/api/books/2"} ResourceName={"book"}>
+                        <BookInfo book={null} />
                     </ResourceLoader>
                     <BasicModal>
                         {books.map((book) => (

@@ -1,5 +1,4 @@
 "use client";
-import { UserType } from "@/app/data/Users";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -13,7 +12,7 @@ import axios from "axios";
  */
 export const ResourceLoader = ({ resourceUrl, ResourceName, children }: { resourceUrl: string; ResourceName: string; children: React.ReactNode }) => {
     // This is the place to set the resource state, and to fetch the resource data from the server
-    const [resource, setResource] = useState<UserType | null>(null);
+    const [resource, setResource] = useState<any | null>(null);
 
     useEffect(() => {
         (async () => {
@@ -25,7 +24,6 @@ export const ResourceLoader = ({ resourceUrl, ResourceName, children }: { resour
             }
 
             const resourceData = await response.data;
-            console.log(resourceData);
 
             // checking if the data isnt empty
             if (!resourceData) {

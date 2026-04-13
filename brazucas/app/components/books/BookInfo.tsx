@@ -1,7 +1,7 @@
+"use client";
 import type { BookType } from "@/app/data/Books";
 
-export const BookInfo = ({ book }: { book: BookType }) => {
-    
+export const BookInfo = ({ book }: { book: BookType | null }) => {
     // Destructuring the variables from the book object
     const { title, pages, author, price } = book || ({} as BookType);
 
@@ -11,7 +11,6 @@ export const BookInfo = ({ book }: { book: BookType }) => {
             <p>Price: ${price}</p>
             <p>Author: {author}</p>
             <p>Pages: {pages}</p>
-            
         </>
     ) : (
         <h1>Loading ...</h1>
