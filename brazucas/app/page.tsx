@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { SplitScreen } from "@components/split-screen/SplitScreen";
 
-const LeftSideComponent = () => {
+const LeftSideComponent = ({ title }: { title: string }) => {
     return (
         <>
-            <h2 style={{ backgroundColor: "red" }}>I am Left</h2>
+            <h2 style={{ backgroundColor: "red" }}>{title}</h2>
         </>
     );
 };
 
-const RightSideComponent = () => {
+const RightSideComponent = ({ title }: { title: string }) => {
     return (
         <>
-            <h2 style={{ backgroundColor: "blue" }}>I am Right</h2>
+            <h2 style={{ backgroundColor: "blue" }}>{title}</h2>
         </>
     );
 };
@@ -23,7 +23,10 @@ export default function Home() {
             <header>
                 <h2 style={{ textAlign: "center", margin: "20px 0px" }}>Brazucas</h2>
             </header>
-            <SplitScreen Left={LeftSideComponent} Right={RightSideComponent} />
+            <SplitScreen leftWidth={1} rightWidth={3}>
+                <LeftSideComponent title={"Left"} />
+                <RightSideComponent title={"Right"} />
+            </SplitScreen>
         </>
     );
 }
