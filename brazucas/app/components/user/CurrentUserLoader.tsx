@@ -43,7 +43,6 @@ export const CurrentUserLoader = ({ children }: { children: React.ReactNode }) =
     useEffect(() => {
         (async () => {
             const user = await fetchUserData();
-            console.log(user);
             setUser(user);
         })();
     }, []);

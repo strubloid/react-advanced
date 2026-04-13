@@ -30,7 +30,6 @@ export const UserLoader = ({ userId, children }: { userId: string; children: Rea
         }
 
         let user: UserType = await userData.json();
-        console.log(user);
 
         // basic validation to check if the user data is not empty, if it is we throw an error
         if (!user) {
@@ -44,7 +43,6 @@ export const UserLoader = ({ userId, children }: { userId: string; children: Rea
     useEffect(() => {
         (async () => {
             const user = await fetchUserData();
-            console.log(user);
             setUser(user);
         })();
     }, [userId]);

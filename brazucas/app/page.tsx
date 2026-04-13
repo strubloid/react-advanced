@@ -13,6 +13,8 @@ import { CurrentUserLoader } from "./components/user/CurrentUserLoader";
 import { UserInfo } from "./components/user/UserInfo";
 import { UserLoader } from "./components/user/UserLoader";
 
+import { ResourceLoader } from "./components/loaders/ResourceLoader";
+
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
 };
@@ -30,11 +32,9 @@ export default function Home() {
 
             <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSideComponent>
-                    <CurrentUserLoader>
+                    <ResourceLoader resourceUrl={"/api/users/2"} ResourceName={"user"}>
                         <UserInfo user={null} />
-                    </CurrentUserLoader>
-
-                    <NormalList items={authors} sourceName="author" ItemComponent={SmallAuthorListItems} />
+                    </ResourceLoader>
                     <BasicModal>
                         {authors.map((author) => (
                             <LargeAuthorListItems key={author.id} author={author} />
@@ -42,10 +42,9 @@ export default function Home() {
                     </BasicModal>
                 </LeftSideComponent>
                 <RightSideComponent>
-                    <UserLoader userId="2">
+                    <ResourceLoader resourceUrl={"/api/users/1"} ResourceName={"user"}>
                         <UserInfo user={null} />
-                    </UserLoader>
-                    <NumberedList items={books} sourceName="book" ItemComponent={SmallBookListItems} />
+                    </ResourceLoader>
                     <BasicModal>
                         {books.map((book) => (
                             <LargeBookListItems key={book.id} book={book} />
