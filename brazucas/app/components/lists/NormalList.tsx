@@ -1,4 +1,10 @@
-export const NormalList = ({ items, sourceName, ItemComponent }) => {
+type NormalListProps = {
+    items: any[]; // Array of items to be rendered
+    sourceName: string; // The name of the source (e.g., "author" or "book")
+    ItemComponent: React.ComponentType<any>; // The component used to render each item
+};
+
+export const NormalList = ({ items, sourceName, ItemComponent }: NormalListProps) => {
     return (
         <>
             {items.map((item, index) => {

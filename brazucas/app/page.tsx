@@ -8,6 +8,7 @@ import { LargeBookListItems } from "@components/books/LargeListItems";
 import { NormalList } from "@components/lists/NormalList";
 import { NumberedList } from "@components/lists/NumberedList";
 import { books } from "./data/Books";
+import { BasicModal } from "./components/modals/BasicModal";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -26,13 +27,20 @@ export default function Home() {
             <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSideComponent>
                     <NormalList items={authors} sourceName="author" ItemComponent={SmallAuthorListItems} />
-                    <NormalList items={authors} sourceName="author" ItemComponent={LargeAuthorListItems} />
+                    <BasicModal>
+                        {authors.map((author) => (
+                            <LargeAuthorListItems key={author.id} author={author} />
+                        ))}
+                    </BasicModal>
+                    {/* <NormalList items={authors} sourceName="author" ItemComponent={LargeAuthorListItems} /> */}
                 </LeftSideComponent>
                 <RightSideComponent>
-                    {/* <NormalList items={books} sourceName="book" ItemComponent={SmallBookListItems} />
-                    <NormalList items={books} sourceName="book" ItemComponent={LargeBookListItems} /> */}
                     <NumberedList items={books} sourceName="book" ItemComponent={SmallBookListItems} />
-                    <NumberedList items={books} sourceName="book" ItemComponent={LargeBookListItems} />
+                    <BasicModal>
+                        {books.map((book) => (
+                            <LargeBookListItems key={book.id} book={book} />
+                        ))}
+                    </BasicModal>
                 </RightSideComponent>
             </SplitScreen>
         </>

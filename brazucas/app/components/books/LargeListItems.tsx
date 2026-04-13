@@ -1,4 +1,6 @@
-export const LargeBookListItems = ({ book }) => {
+import { BookType } from "@/app/data/Books";
+
+export const LargeBookListItems = ({ book }: { book: BookType }) => {
     // Destructuring the variables from the book object
     const { title, pages, author, price } = book;
 
