@@ -21,3 +21,11 @@ export const authors = [
         books: ["Half of a Yellow Sun", "Americanah"],
     },
 ];
+
+export type AuthorType = {
+    id: number;
+    name: string;
+    age: number;
+    country: string;
+    books: string[];
+};

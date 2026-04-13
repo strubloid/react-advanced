@@ -21,3 +21,11 @@ export const books = [
         price: 7.99,
     },
 ];
+
+export type BookType = {
+    id: number;
+    title: string;
+    pages: number;
+    author: string;
+    price: number;
+};

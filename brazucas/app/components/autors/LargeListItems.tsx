@@ -1,4 +1,7 @@
-export const LargeAuthorListItems = ({ author }) => {
+import type { BookType } from "@/app/data/Books";
+import type { AuthorType } from "@/app/data/Authors";
+
+export const LargeAuthorListItems = ({ author }: { author: AuthorType }) => {
     // Destructuring the variables from the author object
     const { name, age, country, books } = author;
 
@@ -9,9 +12,8 @@ export const LargeAuthorListItems = ({ author }) => {
             <p>Country: {country}</p>
             <h2>Books:</h2>
             <ul>
-                {books.map((book) => {
-                    const bookKey = `${book.id}-${name}-book`;
-                    return <li key={bookKey}>{book}</li>;
+                {books.map((book: string) => {
+                    return <li key={`${book}-${name}-book`}>{book}</li>;
                 })}
             </ul>
         </>

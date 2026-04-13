@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SplitScreen } from "@components/split-screen/SplitScreen";
 import { authors } from "./data/Authors";
-import { SmallAuthorListItems } from "@components/autors/SmallListItems";
+import { SmallAuthorListItems } from "@/app/components/autors/SmallListItems";
 import { LargeAuthorListItems } from "@components/autors/LargeListItems";
 import { SmallBookListItems } from "@components/books/SmallListItems";
 import { LargeBookListItems } from "@components/books/LargeListItems";
