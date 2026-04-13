@@ -3,7 +3,8 @@ export const NormalList = ({ items, sourceName, ItemComponent }) => {
         <>
             {items.map((item, index) => {
                 const itemProps = { [sourceName]: item };
-                return <ItemComponent key={item.id} {...itemProps} />;
+                const itemKey = `${item.id}-${sourceName}-${ItemComponent.name}-${index}`;
+                return <ItemComponent key={itemKey} {...itemProps} />;
             })}
         </>
     );

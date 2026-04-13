@@ -9,9 +9,10 @@ export const LargeAuthorListItems = ({ author }) => {
             <p>Country: {country}</p>
             <h2>Books:</h2>
             <ul>
-                {books.map((book) => (
-                    <li key={book.id}>{book}</li>
-                ))}
+                {books.map((book) => {
+                    const bookKey = `${book.id}-${name}-book`;
+                    return <li key={bookKey}>{book}</li>;
+                })}
             </ul>
         </>
     );
