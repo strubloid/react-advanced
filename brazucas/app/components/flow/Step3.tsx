@@ -10,9 +10,9 @@
 export const StepThree = ({ goNext }: { goNext: (data: object) => void }) => {
     return (
         <>
-            <h1>Where is the country you are from?</h1>
+            <h1>Congratulations! You qualified for a gift!</h1>
             {/* <input type="text" placeholder="Country" /> */}
-            <button onClick={() => goNext({ country: "Japan" })}>button</button>
+            <button onClick={() => goNext({})}>button</button>
         </>
     );
 };

@@ -7,12 +7,12 @@
  * @returns a React component that will display the step content and a button
  * to go to the next step
  */
-export const StepTwo = ({ goNext }: { goNext: (data: object) => void }) => {
+export const StepFour = ({ goNext }: { goNext: (data: object) => void }) => {
     return (
         <>
-            <h1>Share your age, please!</h1>
-            {/* <input type="number" placeholder="Age" /> */}
-            <button onClick={() => goNext({ age: 40 })}>button</button>
+            <h1>Where is the country you are from?</h1>
+            {/* <input type="text" placeholder="Country" /> */}
+            <button onClick={() => goNext({ country: "Japan" })}>button</button>
         </>
     );
 };

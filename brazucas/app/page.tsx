@@ -24,12 +24,13 @@ import { BasicValidation } from "./services/BasicValidation";
 import { LocalStorage } from "./services/LocalStorage";
 import { UncontrolledForm } from "./components/forms/UncontrolledForm";
 import { ControlledForm } from "./components/forms/ControlledForm";
-import { useState } from "react";
+import React, { useState } from "react";
 import { UncontrolledFlow } from "./components/flow/UncontrolledFlow";
 import { ControlledFlow } from "./components/flow/ControlledFlow";
 import { StepOne } from "./components/flow/Step1";
 import { StepTwo } from "./components/flow/Step2";
 import { StepThree } from "./components/flow/Step3";
+import { StepFour } from "./components/flow/Step4";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -128,20 +129,37 @@ export default function Home() {
         setShouldDisplay(false);
     };
 
+    // data of the object
+    const [data, setData] = useState<object>({});
+
+    // current step of the flow
+    const [currentStep, setCurrentStep] = useState<number>(0);
+
+    /**
+     * set the current step to the next one.
+     */
+    const onNext = (dataFromStep: object) => {
+        // setting this new data object to the state
+        setData({ ...data, ...dataFromStep });
+
+        // going to the next step
+        setCurrentStep(currentStep + 1);
+    };
+
+    const onDone = (finalData: object) => {
+        console.log("Flow completed with data:", finalData);
+    };
+
     return (
         <>
             <header>
                 <h2 style={{ textAlign: "center", margin: "20px 0px" }}>Brazucas</h2>
             </header>
-            <ControlledFlow
-                onDone={(data) => {
-                    console.log("Finished:", data);
-                    alert("finished!" + JSON.stringify(data));
-                }}
-            >
+            <ControlledFlow currentStep={currentStep} onNext={onNext}>
                 <StepOne />
                 <StepTwo />
-                <StepThree />
+                {data.age > 25 && <StepThree />}
+                <StepFour />
             </ControlledFlow>
 
             {/* <UncontrolledFlow onDone={uncontrolledFlowDoneHandler}>
