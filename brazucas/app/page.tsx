@@ -135,7 +135,7 @@ export default function Home() {
             </header>
             <ControlledFlow
                 onDone={(data) => {
-                    console.log(data);
+                    console.log("Finished:", data);
                     alert("finished!" + JSON.stringify(data));
                 }}
             >
