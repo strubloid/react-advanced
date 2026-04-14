@@ -107,5 +107,19 @@ app.get("/books/:id", (req, res) => {
     res.json(bookCollection);
 });
 
+// Editing a book by it's own ID
+app.post("/books/:id", (req, res) => {
+    const { id } = req.params;
+    const { book: editedBook } = req.body;
+    books = books.map((book) => {
+        return book.id === Number(id) ? editedBook : book;
+    });
+
+    const foundBook = books.find(({ id: bookId }) => bookId === Number(id));
+    console.log("Edited book:", foundBook);
+
+    res.json(foundBook);
+});
+
 let SERVER_PORT = 9090;
 app.listen(SERVER_PORT, () => console.log(`Server is listening on port: ${SERVER_PORT}`));
