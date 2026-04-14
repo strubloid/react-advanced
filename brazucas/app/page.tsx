@@ -10,8 +10,6 @@ export default function Home() {
         <>
             <h1>Welcome to Brazucas!</h1>
             <UserInfoWrapper test="lucas" lol="funny" age={82} />
-
-            <p>This is a React app built with Next.js, TypeScript, and Tailwind CSS.</p>
         </>
     );
 }
