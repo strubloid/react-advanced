@@ -24,6 +24,8 @@ import { BasicValidation } from "./services/BasicValidation";
 import { LocalStorage } from "./services/LocalStorage";
 import { UncontrolledForm } from "./components/forms/UncontrolledForm";
 import { ControlledForm } from "./components/forms/ControlledForm";
+import { useState } from "react";
+import { UncontrolledFlow } from "./components/flow/UncontrolledFlow";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -37,6 +39,7 @@ const RightSideComponent = ({ children }: { children: React.ReactNode }) => {
 const Message = ({ msg }: { msg: string | null }) => (msg ? <h1>{msg}</h1> : <h1>No message available</h1>);
 
 export default function Home() {
+    const [shouldDisplay, setShouldDisplay] = useState(false);
     /**
      * This will be responsible for fetching the user data from the server.
      * @returns User data from the server
@@ -99,20 +102,94 @@ export default function Home() {
         return request.data;
     };
 
+    /**
+     * This will be responsible for handling the button click, and for toggling the modal visibility.
+     */
+    const buttonClickHandler = () => {
+        setShouldDisplay(!shouldDisplay);
+    };
+
+    /**
+     * This will be responsible for showing the correct button text, depending on the modal visibility state.
+     * @returns a string with the button text, either "Show Modal" or "Hide Modal"
+     */
+    const showModalDisplayName = () => {
+        return shouldDisplay ? "Hide Modal" : "Show Modal";
+    };
+
+    /**
+     * This will be responsible for handling the modal close action, and for setting the modal visibility state to false.
+     */
+    const onCloseModal = () => {
+        setShouldDisplay(false);
+    };
+
+    const uncontrolledFlowDoneHandler = async () => {
+        console.log("Uncontrolled flow done");
+    };
+
+    /**
+     * Step components for the UncontrolledFlow, they will receive a
+     * goNext function as a prop, that will be responsible for going
+     * to the next step when the button is clicked.
+     * @param goNext - a function that will be called when the button is clicked,
+     * and will be responsible for going to the next step
+     * @returns a React component that will display the step content and a button
+     * to go to the next step
+     */
+    const StepOne = ({ goNext }: { goNext: () => void }) => {
+        return (
+            <>
+                <h1>Step 1</h1>
+                <button onClick={goNext}>button</button>
+            </>
+        );
+    };
+
+    // continue of the step functions block
+    const StepTwo = ({ goNext }: { goNext: () => void }) => {
+        return (
+            <>
+                <h1>Step 2</h1>
+                <button onClick={goNext}>button</button>
+            </>
+        );
+    };
+
+    // continue of the step functions block
+    const StepThree = ({ goNext }: { goNext: () => void }) => {
+        return (
+            <>
+                <h1>Step 3</h1>
+                <button onClick={goNext}>button</button>
+            </>
+        );
+    };
+
     return (
         <>
             <header>
                 <h2 style={{ textAlign: "center", margin: "20px 0px" }}>Brazucas</h2>
             </header>
+            <UncontrolledFlow onDone={uncontrolledFlowDoneHandler}>
+                <StepOne />
+                <StepTwo />
+                <StepThree />
+            </UncontrolledFlow>
 
-            <SplitScreen leftWidth={1} rightWidth={1}>
+            {/* <BasicModal shouldDisplay={shouldDisplay} onClose={onCloseModal}>
+                <h1>This is the modal content</h1>
+            </BasicModal>
+            <button onClick={buttonClickHandler}>{showModalDisplayName()}</button> */}
+
+            {/* <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSideComponent>
                     <UncontrolledForm />
                 </LeftSideComponent>
                 <RightSideComponent>
                     <ControlledForm />
                 </RightSideComponent>
-            </SplitScreen>
+            </SplitScreen> */}
 
             {/* <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSideComponent>

@@ -29,17 +29,25 @@ const ModalTitle = styled.h3`
  * @param children - The content to be rendered inside the modal
  * @returns a button to open the modal and the modal itself when it's open
  */
-export const BasicModal = ({ shouldDisplay, onClose, children }: { shouldDisplay: boolean; onClose: () => void; children: React.ReactNode }) => {
+export const UncontrolledBasicModal = ({ children }: { children: React.ReactNode }) => {
+    // we set to off at the first time
+    const [show, setShow] = React.useState(false);
+
+    const openModal = () => setShow(true);
+    const closeModal = () => setShow(false);
+
     return (
         <>
-            {shouldDisplay && (
-                <ModalBackground onClick={onClose}>
+            {show && (
+                <ModalBackground onClick={closeModal}>
                     <ModalContent onClick={(e) => e.stopPropagation()}>
-                        <button onClick={onClose}>Close Modal</button>
+                        <button onClick={closeModal}>Close Modal</button>
+                        <ModalTitle>Basic Modal</ModalTitle>
                         {children}
                     </ModalContent>
                 </ModalBackground>
             )}
+            <button onClick={openModal}>Open Modal</button>
         </>
     );
 };
