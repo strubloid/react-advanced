@@ -6,7 +6,8 @@ export const BookInfo = ({ book }: { book: BookType | null }) => {
 
     return book ? (
         <>
-            <h3>{title}</h3>
+            <h1>Book Info</h1>
+            <h2>{title}</h2>
             <p>Price: ${price}</p>
             <p>Author: {author}</p>
             <p>Pages: {pages}</p>

@@ -6,6 +6,7 @@ export const UserInfo = ({ user }: { user: UserType | null }) => {
 
     return user ? (
         <>
+            <h1>User Info</h1>
             <h2>{name}</h2>
             <p>Age: {age} years</p>
             <p>Country: {country}</p>

@@ -16,7 +16,9 @@ import { UserLoader } from "./components/user/UserLoader";
 
 import { ResourceLoader } from "./components/loaders/ResourceLoader";
 import { BookInfo } from "./components/books/BookInfo";
-import { DataSource } from "./components/loaders/DataSource";
+import { DataSourceWithChildren } from "./components/loaders/DataSourceWithChildren";
+import { DataSourceRender } from "./components/loaders/DataSourceRender";
+
 import axios from "axios";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
@@ -83,9 +85,7 @@ export default function Home() {
 
             <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSideComponent>
-                    <DataSource getData={fetchUserData} ResourceName={"user"}>
-                        <UserInfo user={null} />
-                    </DataSource>
+                    <DataSourceRender getData={fetchUserData} render={(resource) => <UserInfo user={resource} />}></DataSourceRender>
                     <BasicModal>
                         {authors.map((author) => (
                             <LargeAuthorListItems key={author.id} author={author} />
@@ -93,9 +93,7 @@ export default function Home() {
                     </BasicModal>
                 </LeftSideComponent>
                 <RightSideComponent>
-                    <DataSource getData={fetchBookData} ResourceName={"book"}>
-                        <BookInfo book={null} />
-                    </DataSource>
+                    <DataSourceRender getData={fetchBookData} render={(resource) => <BookInfo book={resource} />}></DataSourceRender>
                     <BasicModal>
                         {books.map((book) => (
                             <LargeBookListItems key={book.id} book={book} />
