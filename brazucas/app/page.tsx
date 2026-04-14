@@ -20,6 +20,8 @@ import { DataSourceWithChildren } from "./components/loaders/DataSourceWithChild
 import { DataSourceRender } from "./components/loaders/DataSourceRender";
 
 import axios from "axios";
+import { BasicValidation } from "./services/BasicValidation";
+import { LocalStorage } from "./services/LocalStorage";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -28,6 +30,9 @@ const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
 const RightSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
 };
+
+// This will be a simple component to display a message
+const Message = ({ msg }: { msg: string | null }) => (msg ? <h1>{msg}</h1> : <h1>No message available</h1>);
 
 export default function Home() {
     /**
@@ -77,6 +82,21 @@ export default function Home() {
         return book;
     };
 
+    /**
+     * This will load data from a sever.
+     * @param endpoint - the endpoint from which the data will be fetched
+     * @returns the data from the server
+     */
+    const getDataFromServer = async (endpoint: string) => {
+        // loading the data from the server
+        let request = await axios(endpoint);
+
+        // validation from the service BasicValidation
+        BasicValidation.axiosValidate(request, endpoint);
+
+        return request.data;
+    };
+
     return (
         <>
             <header>
@@ -84,6 +104,23 @@ export default function Home() {
             </header>
 
             <SplitScreen leftWidth={1} rightWidth={1}>
+                <LeftSideComponent>
+                    <DataSourceWithChildren getData={fetchUserData} ResourceName="user">
+                        <UserInfo user={null} />
+                    </DataSourceWithChildren>
+                </LeftSideComponent>
+                <RightSideComponent>
+                    <DataSourceWithChildren getData={fetchBookData} ResourceName="book">
+                        <BookInfo book={null} />
+                    </DataSourceWithChildren>
+
+                    <DataSourceWithChildren getData={async () => LocalStorage.load("test")} ResourceName="msg">
+                        <Message msg={null} />
+                    </DataSourceWithChildren>
+                </RightSideComponent>
+            </SplitScreen>
+
+            {/* <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSideComponent>
                     <DataSourceRender getData={fetchUserData} render={(resource) => <UserInfo user={resource} />}></DataSourceRender>
                     <BasicModal>
@@ -100,7 +137,7 @@ export default function Home() {
                         ))}
                     </BasicModal>
                 </RightSideComponent>
-            </SplitScreen>
+            </SplitScreen> */}
         </>
     );
 }
