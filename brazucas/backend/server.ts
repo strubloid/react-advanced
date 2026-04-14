@@ -78,11 +78,15 @@ app.get("/users", (req, res) => res.json(users));
 // Editing a user by it's own ID
 app.post("/users/:id", (req, res) => {
     const { id } = req.params;
-    const { user: editedUser } = req.body;
+    const editedUser = req.body;
+    users = users.map((user) => {
+        return user.id === Number(id) ? editedUser : user;
+    });
 
-    users = users.map((user) => (user.id === Number(id) ? editedUser : user));
+    const foundUser = users.find(({ id: userId }) => userId === Number(id));
+    console.log("Edited user:", foundUser);
 
-    res.json(users.find((user) => user.id === Number(id)));
+    res.json(foundUser);
 });
 
 // Getting all books
