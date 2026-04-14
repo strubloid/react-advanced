@@ -26,6 +26,10 @@ import { UncontrolledForm } from "./components/forms/UncontrolledForm";
 import { ControlledForm } from "./components/forms/ControlledForm";
 import { useState } from "react";
 import { UncontrolledFlow } from "./components/flow/UncontrolledFlow";
+import { ControlledFlow } from "./components/flow/ControlledFlow";
+import { StepOne } from "./components/flow/Step1";
+import { StepTwo } from "./components/flow/Step2";
+import { StepThree } from "./components/flow/Step3";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -124,58 +128,27 @@ export default function Home() {
         setShouldDisplay(false);
     };
 
-    const uncontrolledFlowDoneHandler = async () => {
-        console.log("Uncontrolled flow done");
-    };
-
-    /**
-     * Step components for the UncontrolledFlow, they will receive a
-     * goNext function as a prop, that will be responsible for going
-     * to the next step when the button is clicked.
-     * @param goNext - a function that will be called when the button is clicked,
-     * and will be responsible for going to the next step
-     * @returns a React component that will display the step content and a button
-     * to go to the next step
-     */
-    const StepOne = ({ goNext }: { goNext: () => void }) => {
-        return (
-            <>
-                <h1>Step 1</h1>
-                <button onClick={goNext}>button</button>
-            </>
-        );
-    };
-
-    // continue of the step functions block
-    const StepTwo = ({ goNext }: { goNext: () => void }) => {
-        return (
-            <>
-                <h1>Step 2</h1>
-                <button onClick={goNext}>button</button>
-            </>
-        );
-    };
-
-    // continue of the step functions block
-    const StepThree = ({ goNext }: { goNext: () => void }) => {
-        return (
-            <>
-                <h1>Step 3</h1>
-                <button onClick={goNext}>button</button>
-            </>
-        );
-    };
-
     return (
         <>
             <header>
                 <h2 style={{ textAlign: "center", margin: "20px 0px" }}>Brazucas</h2>
             </header>
-            <UncontrolledFlow onDone={uncontrolledFlowDoneHandler}>
+            <ControlledFlow
+                onDone={(data) => {
+                    console.log(data);
+                    alert("finished!" + JSON.stringify(data));
+                }}
+            >
                 <StepOne />
                 <StepTwo />
                 <StepThree />
-            </UncontrolledFlow>
+            </ControlledFlow>
+
+            {/* <UncontrolledFlow onDone={uncontrolledFlowDoneHandler}>
+                <StepOne />
+                <StepTwo />
+                <StepThree />
+            </UncontrolledFlow> */}
 
             {/* <BasicModal shouldDisplay={shouldDisplay} onClose={onCloseModal}>
                 <h1>This is the modal content</h1>
