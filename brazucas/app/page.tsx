@@ -23,6 +23,7 @@ import axios from "axios";
 import { BasicValidation } from "./services/BasicValidation";
 import { LocalStorage } from "./services/LocalStorage";
 import { UncontrolledForm } from "./components/forms/UncontrolledForm";
+import { ControlledForm } from "./components/forms/ControlledForm";
 
 const LeftSideComponent = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>;
@@ -109,9 +110,7 @@ export default function Home() {
                     <UncontrolledForm />
                 </LeftSideComponent>
                 <RightSideComponent>
-                    <DataSourceWithChildren getData={fetchBookData} ResourceName="book">
-                        <BookInfo book={null} />
-                    </DataSourceWithChildren>
+                    <ControlledForm />
                 </RightSideComponent>
             </SplitScreen>
 
