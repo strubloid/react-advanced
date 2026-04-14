@@ -78,7 +78,7 @@ app.get("/users", (req, res) => res.json(users));
 // Editing a user by it's own ID
 app.post("/users/:id", (req, res) => {
     const { id } = req.params;
-    const editedUser = req.body;
+    const { user: editedUser } = req.body;
     users = users.map((user) => {
         return user.id === Number(id) ? editedUser : user;
     });
