@@ -6,7 +6,7 @@
  */
 export const logProps = (Component: any) => {
     return (props: any) => {
-        console.log("Props:", props);
+        console.log(props);
         return <Component {...props} />;
     };
 };

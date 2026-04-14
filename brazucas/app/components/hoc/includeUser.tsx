@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { UserType } from "@/app/data/Users";
 
 /**
  * This is a simple HOC that will include user information as a prop for a component.
@@ -11,7 +12,7 @@ import axios from "axios";
 export const includeUser = (Component: any, userId: number) => {
     return (props: any) => {
         // user to add
-        const [user, setUser] = useState(null);
+        const [user, setUser] = useState<UserType | null>(null);
 
         // fethcing the data from the server
         useEffect(() => {
