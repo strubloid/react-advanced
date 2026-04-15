@@ -18,11 +18,17 @@ import { RecursiveComponent } from "./components/recursion/Recursive";
 // import { GreenSmallButton, RedButton } from "./components/composition/Composition";
 import { GreenSmallButton, RedButton, SmallRedButton } from "./components/composition/Partial";
 import Card from "./components/cards/CardComponent";
+import { ParentComponent } from "./components/observer/Parent";
+import mitt from "mitt";
 
 // this will be adding the user info as a prop for log the props of the component.
 const UserInfoWrapper = logProps(UserInfo);
 
+// this will be adding the user info as a prop for log the props of the component and include the user info in the component.
 const UserAddedToInfoWrapper = includeUser(UserInfoWrapper, 1);
+
+// creating an event emitter to be used in the observer pattern example
+export const emitter = mitt();
 
 export default function Home() {
 
@@ -49,7 +55,10 @@ export default function Home() {
 
     return (
         <>
-            <Card>
+
+            <ParentComponent />
+
+            {/* <Card>
                 <Card.Header>
                     <h1 style={{ margin: "0" }}>Header</h1>
                 </Card.Header>
@@ -66,7 +75,7 @@ export default function Home() {
                     <button>Ok</button>
                     <button>Cancel</button>
                 </Card.Footer>
-            </Card>
+            </Card> */}
 
             {/* <h1>Recursive Component</h1>
             <SplitScreen leftWidth={1} rightWidth={1}>
