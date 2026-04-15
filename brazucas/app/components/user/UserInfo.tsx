@@ -4,10 +4,8 @@ import { useDataSource } from "../hooks/DataSourceHook";
 import axios from "axios";
 import { useCallback } from "react";
 
-
-
 export const UserInfo = ({ userId }: { userId: number }) => {
-    console.log("i am rendering")
+
     // we load the user data from the hook
     // const user = useResource("/api/users/" + userId);
 
