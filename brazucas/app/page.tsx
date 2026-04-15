@@ -17,6 +17,7 @@ import { NestedObject } from "./data/NestedObject";
 import { RecursiveComponent } from "./components/recursion/Recursive";
 // import { GreenSmallButton, RedButton } from "./components/composition/Composition";
 import { GreenSmallButton, RedButton, SmallRedButton } from "./components/composition/Partial";
+import Card from "./components/cards/CardComponent";
 
 // this will be adding the user info as a prop for log the props of the component.
 const UserInfoWrapper = logProps(UserInfo);
@@ -48,10 +49,26 @@ export default function Home() {
 
     return (
         <>
+            <Card>
+                <Card.Header>
+                    <h1 style={{ margin: "0" }}>Header</h1>
+                </Card.Header>
+                <Card.Body>
+                    He hid under the covers hoping that nobody would notice him there. It
+                    really didn't make much sense since it would be obvious to anyone who
+                    walked into the room there was someone hiding there, but he still held
+                    out hope. He heard footsteps coming down the hall and stop in front in
+                    front of the bedroom door. He heard the squeak of the door hinges and
+                    someone opened the bedroom door. He held his breath waiting for whoever
+                    was about to discover him, but they never did.
+                </Card.Body>
+                <Card.Footer>
+                    <button>Ok</button>
+                    <button>Cancel</button>
+                </Card.Footer>
+            </Card>
 
-            <h1>Recursive Component</h1>
-            
-
+            {/* <h1>Recursive Component</h1>
             <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSide>
                     <h1>Recursive left</h1>
@@ -63,7 +80,7 @@ export default function Home() {
                     <GreenSmallButton text="This is a green small button" />
                     <SmallRedButton text="This is a small red button" />
                 </RightSide>
-            </SplitScreen>
+            </SplitScreen> */}
 
 
             {/* <h1>Custom Hooks</h1>
