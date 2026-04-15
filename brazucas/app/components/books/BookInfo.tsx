@@ -1,12 +1,16 @@
 import type { BookType } from "@/app/data/Books";
+import { useResource } from "../hooks/ResourceHook";
 
-export const BookInfo = ({ book }: { book: BookType | null }) => {
+export const BookInfo = ({ bookId }: { bookId: number }) => {
+
+    // loading by the resource hook the book data from the server
+    const book = useResource("/api/books/" + bookId);
+
     // Destructuring the variables from the book object
     const { title, pages, author, price } = book || ({} as BookType);
 
     return book ? (
         <>
-            <h1>Book Info</h1>
             <h2>{title}</h2>
             <p>Price: ${price}</p>
             <p>Author: {author}</p>
