@@ -1,10 +1,10 @@
 import type { UserType } from "@/app/data/Users";
 import { useUser } from "../hooks/UserHook";
 
-export const UserInfo = () => {
+export const UserInfo = ({ userId }: { userId: number }) => {
 
     // we load the user data from the hook
-    const user = useUser({ userId: 1 });
+    const user = useUser(userId);
 
     // Destructuring the variables from the user object
     const { name, age, country, books } = user || {};

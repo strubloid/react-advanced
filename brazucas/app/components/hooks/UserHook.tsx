@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export const useUser = ({ userId }: { userId: number }) => {
+export const useUser = ( userId: number ) => {
     // This is the place to set the user state, and to fetch the user data from the server
     const [user, setUser] = useState<any | null>(null);
 

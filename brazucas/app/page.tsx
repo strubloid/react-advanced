@@ -14,7 +14,10 @@ export default function Home() {
     return (
         <>
             <h1>Custom Hooks</h1>
-            <UserInfo />
+            <UserInfo userId={1}/>
+            
+            <p>&nbsp;</p>
+            <UserInfo userId={2}/>
             {/* <h1>HOC: Book example</h1>
             <BookForm /> */}
 
