@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <>
             <h1>Custom Hooks</h1>
-
+            <UserInfo />
             {/* <h1>HOC: Book example</h1>
             <BookForm /> */}
 
