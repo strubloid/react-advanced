@@ -15,7 +15,8 @@ import { users } from "./data/Users";
 import { books } from "./data/Books";
 import { NestedObject } from "./data/NestedObject";
 import { RecursiveComponent } from "./components/recursion/Recursive";
-import { GreenSmallButton, RedButton } from "./components/composition/Composition";
+// import { GreenSmallButton, RedButton } from "./components/composition/Composition";
+import { GreenSmallButton, RedButton, SmallRedButton } from "./components/composition/Partial";
 
 // this will be adding the user info as a prop for log the props of the component.
 const UserInfoWrapper = logProps(UserInfo);
@@ -60,6 +61,7 @@ export default function Home() {
                     <h1>Recursive right</h1>
                     <RedButton size="large" text="This is a red button"  />
                     <GreenSmallButton text="This is a green small button" />
+                    <SmallRedButton text="This is a small red button" />
                 </RightSide>
             </SplitScreen>
 
