@@ -10,6 +10,9 @@ import { UncontrolledForm } from "./components/forms/UncontrolledForm";
 import { ControlledForm } from "./components/forms/ControlledForm";
 import { LeftSide } from "./components/layout/LeftSide";
 import { RightSide } from "./components/layout/RightSide";
+import { useState } from "react";
+import { users } from "./data/Users";
+import { books } from "./data/Books";
 
 // this will be adding the user info as a prop for log the props of the component.
 const UserInfoWrapper = logProps(UserInfo);
@@ -17,20 +20,46 @@ const UserInfoWrapper = logProps(UserInfo);
 const UserAddedToInfoWrapper = includeUser(UserInfoWrapper, 1);
 
 export default function Home() {
+
+    let [userId, setUserId] = useState(1);
+    let [bookId, setBookId] = useState(1);
+
+    // limit of each resource
+    const maxUsers = users.length;
+    const maxBooks = books.length;
+
+    /**
+     * This will be responsible to loop any resource, if the element 
+     * to loop is bigger than the total, it will return to the first element.
+     * @param elementToLoop 
+     * @param totalSize 
+     */
+    const loopElements = (elementToLoop: number, totalSize: number) => {
+        // wraps back to 1 when elementToLoop exceeds totalSize
+        const next = elementToLoop % totalSize;
+
+        // if next is 0, it means we have reached the end of the list, so we return 1
+        return next + 1;
+    };
+
     return (
         <>
             <h1>Custom Hooks</h1>
             <p>&nbsp;</p>
+            <p>UID: {userId}</p>
+            <p>BID: {bookId}</p>
+            <button onClick={() => setUserId(loopElements(userId, maxUsers))}>+ UID</button> 
+            <button onClick={() => setBookId(loopElements(bookId, maxBooks))}>+ BID</button> 
             <SplitScreen leftWidth={1} rightWidth={1}>
                 <LeftSide>
                     <h1>User Info</h1>
                     <p>&nbsp;</p>
-                    <UserInfo userId={2}/>
+                    <UserInfo userId={userId}/>
                 </LeftSide>
                 <RightSide>
                     <h1>Book Info</h1>
                     <p>&nbsp;</p>
-                    <BookInfo bookId={2}/>        
+                    <BookInfo bookId={bookId}/>        
                 </RightSide>
             </SplitScreen>
             
