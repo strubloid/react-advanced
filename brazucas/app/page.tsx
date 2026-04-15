@@ -13,8 +13,10 @@ const UserAddedToInfoWrapper = includeUser(UserInfoWrapper, 1);
 export default function Home() {
     return (
         <>
-            <h1>HOC: Book example</h1>
-            <BookForm />
+            <h1>Custom Hooks</h1>
+
+            {/* <h1>HOC: Book example</h1>
+            <BookForm /> */}
 
             {/* <h1>HOC: Including the user with form</h1>
             <UserInfoForm /> */}
