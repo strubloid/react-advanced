@@ -13,6 +13,8 @@ import { RightSide } from "./components/layout/RightSide";
 import { useState } from "react";
 import { users } from "./data/Users";
 import { books } from "./data/Books";
+import { NestedObject } from "./data/NestedObject";
+import { RecursiveComponent } from "./components/recursion/Recursive";
 
 // this will be adding the user info as a prop for log the props of the component.
 const UserInfoWrapper = logProps(UserInfo);
@@ -44,7 +46,23 @@ export default function Home() {
 
     return (
         <>
-            <h1>Custom Hooks</h1>
+
+            <h1>Recursive Component</h1>
+            
+
+            <SplitScreen leftWidth={1} rightWidth={1}>
+                <LeftSide>
+                    <h1>Recursive left</h1>
+                    <RecursiveComponent data={NestedObject} />
+                </LeftSide>
+                <RightSide>
+                    <h1>Recursive right</h1>
+                    
+                </RightSide>
+            </SplitScreen>
+
+
+            {/* <h1>Custom Hooks</h1>
             <p>&nbsp;</p>
             <p>UID: {userId}</p>
             <p>BID: {bookId}</p>
@@ -61,7 +79,7 @@ export default function Home() {
                     <p>&nbsp;</p>
                     <BookInfo bookId={bookId}/>        
                 </RightSide>
-            </SplitScreen>
+            </SplitScreen> */}
             
             {/* <UserInfo userId={2}/> */}
             {/* <h1>HOC: Book example</h1>
