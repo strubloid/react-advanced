@@ -1,5 +1,3 @@
-import type { UserType } from "@/app/data/Users";
-import { useUser } from "../hooks/UserHook";
 import { useDataSource } from "../hooks/DataSourceHook";
 import axios from "axios";
 import { useCallback } from "react";
@@ -13,9 +11,9 @@ export const UserInfo = ({ userId }: { userId: number }) => {
         const response = await axios.get(resourceUrl);
         return response.data;
     }
-    
+
     /**
-     * Fetches data from local storage if available, otherwise fetches from server 
+     * Fetches data from local storage if available, otherwise fetches from server
      * and stores it in local storage.
      * @param resourceUrl The URL of the resource to fetch.
      * @returns The fetched data.
@@ -24,9 +22,9 @@ export const UserInfo = ({ userId }: { userId: number }) => {
         return localStorage.getItem(resourceUrl);
     }
 
-    // to avoid this from render all the time 
+    // to avoid this from render all the time
     // const fetchUser = fetchFromServer("/api/users/" + userId);
-    const fetchUser = useCallback(fetchFromServer("/api/users/" + userId), [userId]);
+    const fetchUser = useCallback(() => fetchFromServer("/api/users/" + userId)(), [userId]);
 
     // loading user from the useDataSource hook
     const user = useDataSource(fetchUser);

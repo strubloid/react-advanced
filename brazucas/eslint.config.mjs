@@ -8,7 +8,10 @@ const eslintConfig = defineConfig([
     {
         rules: {
             "brace-style": ["error", "1tbs"],
-            "no-multiple-empty-lines": ["warning", { max: 1, maxBOF: 0, maxEOF: 1 }],
+            "no-multiple-empty-lines": ["warn", { max: 1, maxBOF: 0, maxEOF: 1 }],
+            indent: ["warn", 4, { SwitchCase: 1 }],
+            "no-trailing-spaces": "warn",
+            "eol-last": ["warn", "always"],
         },
     },
     // Override default ignores of eslint-config-next.

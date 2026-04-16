@@ -24,6 +24,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+            <div id="alert-holder"></div>
             {/* Adding supressHydrationWarning to avoid hydration error of Gramatically */}
             <body suppressHydrationWarning className="min-h-full flex flex-col">
                 {children}
