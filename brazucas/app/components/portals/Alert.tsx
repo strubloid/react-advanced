@@ -29,7 +29,10 @@ export const AlertPortal = ({ children, onClose, show } : AlertProps) => {
 
     // step 3: we call createPortal and pass the content and the place to load.
     return createPortal(
-        <div className="alert" onClick={onClose}>
+        <div className="alert" onClick={() => {
+            onClose?.();
+            console.log("Inner div");
+        }}>
             {children}
         </div>,
         placeToLoad
