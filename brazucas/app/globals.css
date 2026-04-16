@@ -31,3 +31,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.tooltip {
+  position: absolute;
+  border: 2px solid black;
+}

@@ -11,6 +11,7 @@ import { ErrorBoundry } from "./components/error/ErrorBoundry";
 import { ErrorFallback } from "./components/error/ErrorFallback";
 import { KeysExample } from "./components/keys/KeysExample";
 import { EventExample } from "./components/event/EventExample";
+import { UseLayoutEffectExample } from "./components/hooks/UseLayoutEffectExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -21,7 +22,9 @@ export default function Home() {
         <>
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <EventExample />
+                <UseLayoutEffectExample />
+
+                {/* <EventExample /> */}
 
                 {/* <KeysExample /> */}
 
