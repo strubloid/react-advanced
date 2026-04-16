@@ -6,6 +6,9 @@ import { CardExample } from "./components/cards/CardExample";
 import { RecursiveExample } from "./components/recursion/RecursiveExample";
 import { CustomHookExample } from "./components/hooks/CustomHookExample";
 import { HocExample } from "./components/hoc/HocExample";
+import { ErrorBoundriesExample } from "./components/error/ErrorBoundriesExample";
+import { ErrorBoundry } from "./components/error/ErrorBoundry";
+import { ErrorFallback } from "./components/error/ErrorFallback";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -14,18 +17,23 @@ export default function Home() {
 
     return (
         <>
-            <PortalExample />
+            <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-            {/* <ParentComponent /> */}
+                <ErrorBoundriesExample />
 
-            {/* <CardExample /> */}
+                {/* <PortalExample /> */}
 
-            {/* <RecursiveExample /> */}
+                {/* <ParentComponent /> */}
 
-            {/* <CustomHookExample /> */}
+                {/* <CardExample /> */}
 
-            {/* <HocExample /> */}
+                {/* <RecursiveExample /> */}
 
+                {/* <CustomHookExample /> */}
+
+                {/* <HocExample /> */}
+
+            </ErrorBoundry>
         </>
     );
 }
