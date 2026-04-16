@@ -9,6 +9,7 @@ import { HocExample } from "./components/hoc/HocExample";
 import { ErrorBoundriesExample } from "./components/error/ErrorBoundriesExample";
 import { ErrorBoundry } from "./components/error/ErrorBoundry";
 import { ErrorFallback } from "./components/error/ErrorFallback";
+import { KeysExample } from "./components/keys/KeysExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -19,7 +20,9 @@ export default function Home() {
         <>
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <ErrorBoundriesExample />
+                <KeysExample />
+                
+                {/* <ErrorBoundriesExample /> */}
 
                 {/* <PortalExample /> */}
 
