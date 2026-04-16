@@ -5,9 +5,12 @@
  */
 export const Child = () => {
 
-    // this is simulating an error being thrown in the child component,
-    // which will be caught by the error boundary in the parent component.
-    throw new Error("This is an error from the child component");
+    const showError = true;
+
+    // this is simulating an error being thrown in the child component
+    if(showError){
+        throw new Error("This is an error from the child component");
+    }
 
     return (<h1>Child Component</h1>);
 

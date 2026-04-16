@@ -35,6 +35,16 @@ export class ErrorBoundry extends React.Component<ErrorBoundryProps, ErrorBoundr
         return { hasError: true, error };
     }
 
+    /**
+     * This will print the error, so you can understand better where
+     * the error is coming from, and what is the error itself.
+     * @param error The error that was thrown.
+     * @param errorInfo An object with information about the component stack.
+     */
+    componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+        console.log("Error caught in ErrorBoundry:", error, errorInfo);
+    }
+
     // this is the return of the fallback or the children
     render (){
 
