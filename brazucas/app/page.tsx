@@ -13,6 +13,7 @@ import { KeysExample } from "./components/keys/KeysExample";
 import { EventExample } from "./components/event/EventExample";
 import { UseLayoutEffectExample } from "./components/hooks/UseLayoutEffectExample";
 import { UseIDExample } from "./components/hooks/UseIDExample";
+import { UseCallbackExample } from "./components/hooks/UseCallbackExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -23,7 +24,9 @@ export default function Home() {
         <>
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <UseIDExample />
+                <UseCallbackExample />
+
+                {/* <UseIDExample /> */}
 
                 {/* <UseLayoutEffectExample /> */}
 
