@@ -15,6 +15,7 @@ import { UseLayoutEffectExample } from "./components/hooks/UseLayoutEffectExampl
 import { UseIDExample } from "./components/hooks/UseIDExample";
 import { UseCallbackExample } from "./components/hooks/UseCallbackExample";
 import { UseDeferredValueExample } from "./components/hooks/UseDefferedValueExample";
+import { UseTransitionExample } from "./components/hooks/UseTransitionExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -25,7 +26,9 @@ export default function Home() {
         <>
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <UseDeferredValueExample />
+                <UseTransitionExample />
+
+                {/* <UseDeferredValueExample /> */}
 
                 {/* <UseCallbackExample /> */}
 
