@@ -18,6 +18,7 @@ import { UseDeferredValueExample } from "./components/hooks/UseDefferedValueExam
 import { UseTransitionExample } from "./components/hooks/UseTransitionExample";
 import { AsyncReactRouterExample, asyncReactRouterExamplePromise } from "./components/demo2/AsyncReactRouterExample";
 import Nav from "./components/demo2/Nav";
+import { ElementPropExample } from "./components/demoElementProp/ElementPropExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -29,7 +30,9 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <AsyncReactRouterExample promise={asyncReactRouterExamplePromise} />
+                <ElementPropExample />
+
+                {/* <AsyncReactRouterExample promise={asyncReactRouterExamplePromise} /> */}
                 {/* <UseTransitionExample /> */}
 
                 {/* <UseDeferredValueExample /> */}
