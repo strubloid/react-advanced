@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
+import Nav from "./components/demo2/Nav";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -27,7 +29,10 @@ export default function RootLayout({
             {/* Adding supressHydrationWarning to avoid hydration error of Gramatically */}
             <body suppressHydrationWarning className="min-h-full flex flex-col">
                 <div id="alert-holder"></div>
-                {children}
+                <Nav />
+                <Suspense fallback={<div style={{ backgroundColor: "#333", padding: "20px", color: "white", textAlign: "center" }}>Loading...</div>}>
+                    {children}
+                </Suspense>
             </body>
         </html>
     );
