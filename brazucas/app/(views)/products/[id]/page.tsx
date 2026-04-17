@@ -1,4 +1,4 @@
-import DeleteProduct from "../../../products/delete-product";
+import ViewProduct from "@app/views/products/view-products";
 
 type Props = {
     params: Promise<{ id: string }>;
@@ -6,5 +6,5 @@ type Props = {
 
 export default async function Page({ params }: Props) {
     const { id } = await params;
-    return <DeleteProduct id={id} />;
+    return <ViewProduct id={id} />;
 }

@@ -10,6 +10,7 @@ const config: Config = {
     moduleNameMapper: {
         "^@components/(.*)$": "<rootDir>/app/components/$1",
         "^@examples/(.*)$": "<rootDir>/app/examples/$1",
+        "^@app/(.*)$": "<rootDir>/app/$1",
         "^@/(.*)$": "<rootDir>/$1",
     },
 };

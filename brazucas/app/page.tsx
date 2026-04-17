@@ -19,6 +19,7 @@ import { UseTransitionExample } from "@examples/UseTransitionExample";
 import { AsyncReactRouterExample, asyncReactRouterExamplePromise } from "@examples/AsyncReactRouterExample";
 import { ElementPropExample } from "@examples/ElementPropExample";
 import { OptimizingContextAPIExample } from "@examples/OptimizingContextAPIExample";
+import { RouteExample } from "@examples/RouteExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -29,6 +30,8 @@ export default function Home() {
         <>
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
+
+                <RouteExample />
 
                 {/* <OptimizingContextAPIExample /> */}
 
@@ -43,7 +46,7 @@ export default function Home() {
 
                 {/* <UseIDExample /> */}
 
-                <UseLayoutEffectExample />
+                {/* <UseLayoutEffectExample /> */}
 
                 {/* <EventExample /> */}
 
