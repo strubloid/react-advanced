@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../components/demoElementProp/Button";
 
 // If you need to use styles, needs to have this type React.CSSProperties
 const style: React.CSSProperties = {

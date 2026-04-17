@@ -1,5 +1,5 @@
-import { Buttons } from "./Buttons";
-import { Counter } from "./Counter";
+import { Buttons } from "../components/observer/Buttons";
+import { Counter } from "../components/observer/Counter";
 
 /**
  * Main parent component that will render the buttons and the counter components.

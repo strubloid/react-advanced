@@ -1,5 +1,5 @@
 import { useCallback, useDeferredValue, useEffect,  useRef, useState } from "react";
-import { HeavyComponent } from "./HeavyComponent";
+import { HeavyComponent } from "../components/hooks/HeavyComponent";
 
 export const UseDeferredValueExample = () => {
     const [keyword, setKeyword] = useState("");

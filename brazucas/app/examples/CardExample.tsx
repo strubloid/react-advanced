@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import Card from "./CardComponent";
+import Card from "../components/cards/CardComponent";
 
 /**
  * This is the example of a card component that can be used in the app.

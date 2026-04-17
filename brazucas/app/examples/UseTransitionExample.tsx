@@ -1,8 +1,8 @@
 import { SetStateAction, useState, useTransition } from "react";
-import { StyledButton } from "../demo/StyledElements";
-import Cover from "../demo/Cover";
-import Reviews from "../demo/Reviews";
-import Writer from "../demo/Writer";
+import { StyledButton } from "../components/demo/StyledElements";
+import Cover from "../components/demo/Cover";
+import Reviews from "../components/demo/Reviews";
+import Writer from "../components/demo/Writer";
 
 export const UseTransitionExample = () => {
 

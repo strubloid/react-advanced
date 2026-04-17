@@ -1,10 +1,10 @@
-import { GreenSmallButton, RedButton } from "../composition/Composition";
-import { SmallRedButton } from "../composition/Partial";
-import { LeftSide } from "../layout/LeftSide";
-import { RightSide } from "../layout/RightSide";
-import { SplitScreen } from "../split-screen/SplitScreen";
-import { RecursiveComponent } from "./Recursive";
-import { NestedObject } from "../../data/NestedObject";
+import { GreenSmallButton, RedButton } from "../components/composition/Composition";
+import { SmallRedButton } from "../components/composition/Partial";
+import { LeftSide } from "../components/layout/LeftSide";
+import { RightSide } from "../components/layout/RightSide";
+import { SplitScreen } from "../components/split-screen/SplitScreen";
+import { RecursiveComponent } from "../components/recursion/Recursive";
+import { NestedObject } from "../data/NestedObject";
 
 /**
  * This is an example of how to use the RecursiveComponent to render a nested object.

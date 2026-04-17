@@ -9,6 +9,7 @@ const config: Config = {
     transformIgnorePatterns: ["/node_modules/(?!(styled-components)/)"],
     moduleNameMapper: {
         "^@components/(.*)$": "<rootDir>/app/components/$1",
+        "^@examples/(.*)$": "<rootDir>/app/examples/$1",
         "^@/(.*)$": "<rootDir>/$1",
     },
 };

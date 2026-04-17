@@ -1,7 +1,7 @@
 "use client";
 import { use, Suspense } from "react";
-import { MainContainer, MainHeading } from "./StyledElements";
-import delay from "./Delay";
+import { MainContainer, MainHeading } from "../components/demo2/StyledElements";
+import delay from "../components/demo2/Delay";
 
 // equivalent of <Await resolve={promise}>{(data) => ...}</Await>
 const Awaited = ({ promise }: { promise: Promise<unknown> }) => {

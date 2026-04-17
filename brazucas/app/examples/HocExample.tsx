@@ -1,8 +1,8 @@
-import { BookForm } from "../forms/BookForm";
-import { UserInfoForm } from "../forms/UserForm";
-import { UserInfo } from "../user/UserInfo";
-import { includeUser } from "./includeUser";
-import { logProps } from "./logProps";
+import { BookForm } from "../components/forms/BookForm";
+import { UserInfoForm } from "../components/forms/UserForm";
+import { UserInfo } from "../components/user/UserInfo";
+import { includeUser } from "../components/hoc/includeUser";
+import { logProps } from "../components/hoc/logProps";
 
 // this will be adding the user info as a prop for log the props of the component.
 const UserInfoWrapper = logProps(UserInfo);

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { BookInfo } from "../books/BookInfo";
-import { LeftSide } from "../layout/LeftSide";
-import { RightSide } from "../layout/RightSide";
-import { SplitScreen } from "../split-screen/SplitScreen";
-import { UserInfo } from "../user/UserInfo";
+import { BookInfo } from "../components/books/BookInfo";
+import { LeftSide } from "../components/layout/LeftSide";
+import { RightSide } from "../components/layout/RightSide";
+import { SplitScreen } from "../components/split-screen/SplitScreen";
+import { UserInfo } from "../components/user/UserInfo";
 import { users } from "@/app/data/Users";
 import { books } from "@/app/data/Books";
 

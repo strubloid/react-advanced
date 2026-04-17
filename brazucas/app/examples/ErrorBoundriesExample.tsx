@@ -1,4 +1,4 @@
-import { Child } from "./Child";
+import { Child } from "../components/error/Child";
 
 export const ErrorBoundriesExample = () => {
 

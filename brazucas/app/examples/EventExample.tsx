@@ -1,5 +1,5 @@
 import { JSX, useState } from "react";
-import { AlertPortal } from "../portals/Alert";
+import { AlertPortal } from "../components/portals/Alert";
 
 /**
  * This is the component that will be showing the basis of a portal.
