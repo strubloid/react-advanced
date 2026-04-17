@@ -78,12 +78,11 @@ export class BasicValidation {
 
     /**
      * This will be responsible to check if the data is an object,
-     * if it is not an object or if it is null, it will return false, 
+     * if it is not an object or if it is null, it will return false,
      * otherwise it will return true.
      * @param data - the data to be checked
      * @returns true if the data is an object and not null, false otherwise
      */
-    static isObject = ({data}: {data: any}) => typeof data === "object" && data !== null;
-
+    static isObject = ({data}: {data: unknown}) => typeof data === "object" && data !== null;
 
 }

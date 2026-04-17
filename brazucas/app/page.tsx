@@ -31,7 +31,7 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <OptimizingContextAPIExample />
+                {/* <OptimizingContextAPIExample /> */}
 
                 {/* <ElementPropExample /> */}
 
@@ -44,7 +44,7 @@ export default function Home() {
 
                 {/* <UseIDExample /> */}
 
-                {/* <UseLayoutEffectExample /> */}
+                <UseLayoutEffectExample />
 
                 {/* <EventExample /> */}
 

@@ -1,5 +1,5 @@
-import delay from "../components/demo2/Delay";
-import { Books } from "../components/demo2/Books";
+import delay from "../../components/demo2/Delay";
+import { Books } from "../../components/demo2/Books";
 
 export default function Page() {
     // created fresh on every request, same as loader() running on each navigation
