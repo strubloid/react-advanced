@@ -19,6 +19,7 @@ import { UseTransitionExample } from "./components/hooks/UseTransitionExample";
 import { AsyncReactRouterExample, asyncReactRouterExamplePromise } from "./components/demo2/AsyncReactRouterExample";
 import Nav from "./components/demo2/Nav";
 import { ElementPropExample } from "./components/demoElementProp/ElementPropExample";
+import { OptimizingContextAPIExample } from "./components/optimizing/OptimizingContextAPIExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -30,7 +31,9 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <ElementPropExample />
+                <OptimizingContextAPIExample />
+
+                {/* <ElementPropExample /> */}
 
                 {/* <AsyncReactRouterExample promise={asyncReactRouterExamplePromise} /> */}
                 {/* <UseTransitionExample /> */}
