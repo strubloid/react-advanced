@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartStateContext } from "../utils/CartContext";
 
-export function useCartContext() {
+export function useStateContext() {
     const value = useContext(CartStateContext);
 
     if (value === null) {

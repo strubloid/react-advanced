@@ -1,5 +1,5 @@
 import { useReducer} from "react";
-import { Context, reducer } from "../utils/CartContext";
+import { CartStateContext, CartDispatchContext, reducer } from "../utils/CartContext";
 
 // this is the props for the cart provider component
 type CartProviderProps = {
@@ -20,9 +20,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
     return (
         <>
-            <Context.Provider value={{ state, dispatch }}>
-                {children}
-            </Context.Provider>
+            <CartDispatchContext.Provider value={dispatch}>
+                <CartStateContext.Provider value={state}>
+                    {children}
+                </CartStateContext.Provider>
+            </CartDispatchContext.Provider>
         </>
 
     );

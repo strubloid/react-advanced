@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { CartStateContext } from "../utils/CartContext";
+import { CartDispatchContext } from "../utils/CartContext";
 
-export function useCartContext() {
-    const value = useContext(CartStateContext);
+export function useDispatchContext() {
+    const value = useContext(CartDispatchContext);
 
     if (value === null) {
         throw new Error("Must be wrapped inside Context.Provider");

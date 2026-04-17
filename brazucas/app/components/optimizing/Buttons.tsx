@@ -1,7 +1,7 @@
-import { useCartContext } from "./hooks/UseCartContext";
+import { useDispatchContext } from "./hooks/UseDispatchContext";
 
 const Buttons = () => {
-    const { dispatch } = useCartContext();
+    const dispatch = useDispatchContext();
     return (
         <div className="buttons">
             <button
