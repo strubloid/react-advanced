@@ -6,6 +6,7 @@ import { withAsync } from "@/app/helpers/WithAsync";
 import type { WithAsyncResult } from "@/app/helpers/WithAsync";
 import { ApiStatus, APIStatysType } from "@/app/constants/APIStatus";
 import { UseApiStatus } from "@/app/api/hooks/UseAPIStatus";
+import LazyLoader from "../loaders/LazyLoader";
 
 const useFetchUsers = () => {
 
@@ -102,14 +103,17 @@ function Users() {
 
     // loading once the hook to fetch the users data when the component is mounted
     useEffect(() => {
-        // initFetchUsers();
+        initFetchUsers();
     }, []);
 
     return (
         <Container>
             <FetchButton onClick={initFetchUsers}>
                 {/* {fetchUserStatus === ApiStatus.LOADING ? "Loading..." : "Fetch Users"} */}
-                {isFetchUsersLoading ? "Loading..." : "Fetch Users"}
+                {/* {isFetchUsersLoading ? "Loading..." : "Fetch Users"} */}
+
+                <LazyLoader show={isFetchUsersLoading} delay={200} default="Fetch Users" />
+
             </FetchButton>
 
             <FlexContainer>

@@ -14,7 +14,7 @@ const prepareStatus = (currentStatus: APIStatysType) => {
     for (const status of DefaultAPIStatus) {
 
         // making sure that is capitalized the first letter of the status
-        const normalizedStatus = BasicString.capitalize(status);
+        const normalizedStatus = BasicString.capitalize(status.toLowerCase());
 
         // creating a key for the status, for example: isLoading, isSuccess, isError
         const normalizedStatusKey : string = `is${normalizedStatus}`;
