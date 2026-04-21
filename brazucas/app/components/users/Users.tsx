@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { User } from "@/app/types/UserType";
 import { withAsync } from "@/app/helpers/WithAsync";
 import type { WithAsyncResult } from "@/app/helpers/WithAsync";
-
-type APIStatus =  "IDLE" | "LOADING" | "SUCCESS" | "ERROR";
+import { ApiStatus, APIStatysType } from "@/app/constants/APIStatus";
+import { UseApiStatus } from "@/app/api/hooks/UseAPIStatus";
 
 const useFetchUsers = () => {
 
@@ -13,7 +13,16 @@ const useFetchUsers = () => {
     const [users, setUsers] = useState<User[]>([]);
 
     // fetchUserStatus state to indicate the status of the API request (IDLE, LOADING, SUCCESS, ERROR)
-    const [fetchUserStatus, setFetchUserStatus] = useState<APIStatus>("IDLE");
+    // const [fetchUserStatus, setFetchUserStatus] = useState<APIStatysType>(ApiStatus.IDLE);
+
+    const {
+        status : fetchUserStatus,
+        setStatus : setFetchUsersStatus,
+        isIdle : isFetchUsersIdle,
+        isLoading : isFetchUsersLoading,
+        isError : isFetchUsersError,
+        isSuccess : isFetchUsersSuccess,
+    } = UseApiStatus(ApiStatus.IDLE);
 
     /**
      * fetchUsers function to fetch the users data from the API and update the users state
@@ -23,18 +32,18 @@ const useFetchUsers = () => {
     const initFetchUsers = async () => {
 
         // we set to status to LOADING to indicate that the API request is being made
-        setFetchUserStatus("LOADING");
+        setFetchUsersStatus(ApiStatus.LOADING);
 
         // loading the response or the error from helper withAsync, we pass the async fetchUSers function
         const { response, error } : WithAsyncResult<User[]> = await withAsync(fetchUsers);
 
         // in a case we have an error, we just throw it
         if (error) {
-            setFetchUserStatus("ERROR");
+            setFetchUsersStatus(ApiStatus.ERROR);
         } else if (response) {
 
             // we set the fetchUserStatus state to SUCCESS to indicate that the API request has finished successfully
-            setFetchUserStatus("SUCCESS");
+            setFetchUsersStatus(ApiStatus.SUCCESS);
 
             // we set the users state with the response data
             setUsers(response || []);
@@ -45,7 +54,10 @@ const useFetchUsers = () => {
 
     return {
         users,
-        fetchUserStatus,
+        isFetchUsersIdle,
+        isFetchUsersLoading,
+        isFetchUsersError,
+        isFetchUsersSuccess,
         initFetchUsers,
     }
 
@@ -86,7 +98,7 @@ const FetchButton = styled.button`
 function Users() {
 
     // loading the users and initFetchUsers function from the useFetchUsers hook
-    const { users, initFetchUsers, fetchUserStatus } = useFetchUsers();
+    const { users, isFetchUsersIdle, isFetchUsersLoading, isFetchUsersError, isFetchUsersSuccess, initFetchUsers } = useFetchUsers();
 
     // loading once the hook to fetch the users data when the component is mounted
     useEffect(() => {
@@ -95,7 +107,10 @@ function Users() {
 
     return (
         <Container>
-            <FetchButton onClick={initFetchUsers}>{fetchUserStatus === "LOADING" ? "Loading..." : "Fetch Users"}</FetchButton>
+            <FetchButton onClick={initFetchUsers}>
+                {/* {fetchUserStatus === ApiStatus.LOADING ? "Loading..." : "Fetch Users"} */}
+                {isFetchUsersLoading ? "Loading..." : "Fetch Users"}
+            </FetchButton>
 
             <FlexContainer>
                 <ContentContainer>

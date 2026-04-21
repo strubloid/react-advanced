@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ComponentType } from "react";
 import axios, { Axios } from "axios";
 import { UserType } from "@/app/data/Users";
 import { BasicValidation } from "@/app/services/BasicValidation";
@@ -7,13 +7,13 @@ import { BasicValidation } from "@/app/services/BasicValidation";
 // extra function to capitalize the first letter of a string, used for the resource name in the onPost function
 const toCapital = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const includeUpdateableResource = (Component: any, resourceUrl: string, resourceName: string) => {
-    return (props: any) => {
+export const includeUpdateableResource = (Component: ComponentType<any>, resourceUrl: string, resourceName: string) => {
+    const HOC = (props: unknown) => {
         // initial resource state, to be used for comparison and to avoid unnecessary updates
         const [initialResource, setInitialResource] = useState<UserType | null>(null);
 
         // resource to add
-        const [resource, setResource] = useState<any | null>(null);
+        const [resource, setResource] = useState<unknown | null>(null);
 
         // fetching the data from the server
         useEffect(() => {
@@ -34,7 +34,7 @@ export const includeUpdateableResource = (Component: any, resourceUrl: string, r
          */
         const onChange = (updates: UserType) => {
             console.log("On Change:");
-            setResource({ ...resource, ...updates });
+            setResource({ ...(resource as object), ...updates });
         };
 
         /**
