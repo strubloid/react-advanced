@@ -1,5 +1,4 @@
 import { JSX } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Products from "../views/products/products";
 import ViewProduct from "../views/products/view-products";
 import AddProduct from "../views/products/add-product";
