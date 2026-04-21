@@ -20,6 +20,7 @@ import { AsyncReactRouterExample, asyncReactRouterExamplePromise } from "@exampl
 import { ElementPropExample } from "@examples/ElementPropExample";
 import { OptimizingContextAPIExample } from "@examples/OptimizingContextAPIExample";
 import { RouteExample } from "@examples/RouteExample";
+import { APIExample } from "./examples/APIExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -31,7 +32,9 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <RouteExample />
+                <APIExample />
+
+                {/* <RouteExample /> */}
 
                 {/* <OptimizingContextAPIExample /> */}
 
