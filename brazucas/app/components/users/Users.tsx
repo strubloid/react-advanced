@@ -7,51 +7,19 @@ import type { WithAsyncResult } from "@/app/helpers/WithAsync";
 import { ApiStatus, APIStatysType } from "@/app/constants/APIStatus";
 import { UseApiStatus } from "@/app/api/hooks/UseAPIStatus";
 import LazyLoader from "../loaders/LazyLoader";
+import { UseAPI } from "@/app/api/hooks/UseAPI";
 
 const useFetchUsers = () => {
 
-    // users state to store the fetched users data
-    const [users, setUsers] = useState<User[]>([]);
-
-    // fetchUserStatus state to indicate the status of the API request (IDLE, LOADING, SUCCESS, ERROR)
-    // const [fetchUserStatus, setFetchUserStatus] = useState<APIStatysType>(ApiStatus.IDLE);
-
     const {
-        status : fetchUserStatus,
-        setStatus : setFetchUsersStatus,
-        isIdle : isFetchUsersIdle,
-        isLoading : isFetchUsersLoading,
-        isError : isFetchUsersError,
-        isSuccess : isFetchUsersSuccess,
-    } = UseApiStatus(ApiStatus.IDLE);
-
-    /**
-     * fetchUsers function to fetch the users data from the API and update the users state
-     * it uses the API object to make the GET request to the users endpoint and updates the
-     * users state with the response data
-     */
-    const initFetchUsers = async () => {
-
-        // we set to status to LOADING to indicate that the API request is being made
-        setFetchUsersStatus(ApiStatus.LOADING);
-
-        // loading the response or the error from helper withAsync, we pass the async fetchUSers function
-        const { response, error } : WithAsyncResult<User[]> = await withAsync(fetchUsers);
-
-        // in a case we have an error, we just throw it
-        if (error) {
-            setFetchUsersStatus(ApiStatus.ERROR);
-        } else if (response) {
-
-            // we set the fetchUserStatus state to SUCCESS to indicate that the API request has finished successfully
-            setFetchUsersStatus(ApiStatus.SUCCESS);
-
-            // we set the users state with the response data
-            setUsers(response || []);
-            // console.log("Fetched users: ", response);
-        }
-
-    };
+        data : users,
+        exec : initFetchUsers,
+        status: fetchUsersStatus,
+        isIdle: isFetchUsersIdle,
+        isLoading: isFetchUsersLoading,
+        isError: isFetchUsersError,
+        isSuccess: isFetchUsersSuccess,
+    } = UseAPI( async () => await fetchUsers())
 
     return {
         users,
