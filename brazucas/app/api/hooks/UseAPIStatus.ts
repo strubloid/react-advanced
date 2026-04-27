@@ -2,12 +2,19 @@ import { APIStatysType, DefaultAPIStatus, IDLE } from "@/app/constants/APIStatus
 import { BasicString } from "@/app/services/BasicString";
 import { useMemo, useState } from "react";
 
+type NormalizedStatuses = {
+    isIdle: boolean;
+    isLoading: boolean;
+    isSuccess: boolean;
+    isError: boolean;
+};
+
 /**
  * Prepares the status object with boolean flags for each possible status.
  * @param currentStatus - the current status of the API request
  * @returns An object containing boolean flags for each possible status
  */
-const prepareStatus = (currentStatus: APIStatysType) => {
+const prepareStatus = (currentStatus: APIStatysType): NormalizedStatuses => {
 
     const statuses: Record<string, boolean> = {};
 
@@ -24,7 +31,7 @@ const prepareStatus = (currentStatus: APIStatysType) => {
 
     }
 
-    return statuses;
+    return statuses as NormalizedStatuses;
 }
 
 /**

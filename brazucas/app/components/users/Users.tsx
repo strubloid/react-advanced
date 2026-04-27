@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { fetchUsers } from "@/app/api/UsersAPI";
 import styled from "styled-components";
 import { User } from "@/app/types/UserType";
-import { withAsync } from "@/app/helpers/WithAsync";
-import type { WithAsyncResult } from "@/app/helpers/WithAsync";
-import { ApiStatus, APIStatysType } from "@/app/constants/APIStatus";
-import { UseApiStatus } from "@/app/api/hooks/UseAPIStatus";
 import LazyLoader from "../loaders/LazyLoader";
 import { UseAPI } from "@/app/api/hooks/UseAPI";
 
@@ -14,8 +10,6 @@ const useFetchUsers = () => {
     const {
         data : users,
         exec : initFetchUsers,
-        status: fetchUsersStatus,
-        isIdle: isFetchUsersIdle,
         isLoading: isFetchUsersLoading,
         isError: isFetchUsersError,
         isSuccess: isFetchUsersSuccess,
@@ -23,7 +17,6 @@ const useFetchUsers = () => {
 
     return {
         users,
-        isFetchUsersIdle,
         isFetchUsersLoading,
         isFetchUsersError,
         isFetchUsersSuccess,
@@ -67,11 +60,12 @@ const FetchButton = styled.button`
 function Users() {
 
     // loading the users and initFetchUsers function from the useFetchUsers hook
-    const { users, isFetchUsersIdle, isFetchUsersLoading, isFetchUsersError, isFetchUsersSuccess, initFetchUsers } = useFetchUsers();
+    const { users, isFetchUsersLoading, initFetchUsers } = useFetchUsers();
 
     // loading once the hook to fetch the users data when the component is mounted
     useEffect(() => {
         initFetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -87,7 +81,7 @@ function Users() {
             <FlexContainer>
                 <ContentContainer>
                     {users
-                        ? users.map((user : User , index) => (
+                        ? (users as User[]).map((user: User, index: number) => (
                             <React.Fragment key={index}>
                                 <UserName>{user.name}</UserName>
                                 <UserEmail>{user.email}</UserEmail>
