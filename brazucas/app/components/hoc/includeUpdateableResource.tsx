@@ -77,4 +77,6 @@ export const includeUpdateableResource = (Component: ComponentType<any>, resourc
 
         return <Component {...props} {...resourceProps} />;
     };
+
+    return HOC;
 };
