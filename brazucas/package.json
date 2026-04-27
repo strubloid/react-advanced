@@ -13,6 +13,7 @@
         "test:coverage": "jest --coverage"
     },
     "dependencies": {
+        "@tanstack/react-query": "^5.100.5",
         "@types/styled-components": "^5.1.36",
         "axios": "^1.15.0",
         "mitt": "^3.0.1",

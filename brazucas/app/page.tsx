@@ -5,6 +5,8 @@ import { ErrorFallback } from "./components/error/ErrorFallback";
 import { APIExample } from "./examples/APIExample";
 import { CancelPreviousRequestExample } from "./examples/CancelPreviousRequestExample";
 import { HocExample } from "./examples/HocExample";
+import { CustomHookExample } from "./examples/CustomHookExample";
+import { UsingReactQueryExample } from "./examples/UsingReactQueryExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -15,6 +17,8 @@ export default function Home() {
         <>
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
+
+                <UsingReactQueryExample />
 
                 {/* <CancelPreviousRequestExample /> */}
 
@@ -53,7 +57,7 @@ export default function Home() {
 
                 {/* <CustomHookExample /> */}
 
-                <HocExample />
+                {/* <HocExample /> */}
 
             </ErrorBoundry>
         </>
