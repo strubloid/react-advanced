@@ -7,6 +7,7 @@ import { CancelPreviousRequestExample } from "./examples/CancelPreviousRequestEx
 import { HocExample } from "./examples/HocExample";
 import { CustomHookExample } from "./examples/CustomHookExample";
 import { UsingReactQueryExample } from "./examples/UsingReactQueryExample";
+import { InfiniteScrollExample } from "./examples/InfiniteScrollExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -18,7 +19,8 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <UsingReactQueryExample />
+                <InfiniteScrollExample />
+                {/* <UsingReactQueryExample /> */}
 
                 {/* <CancelPreviousRequestExample /> */}
 

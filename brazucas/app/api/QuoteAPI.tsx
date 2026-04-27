@@ -1,6 +1,6 @@
 import API, { AbortableConfig } from "@app/api/Axios";
 import { BasicValidation } from "../services/BasicValidation";
-import { QuotePageResponse, QuoteResponse, QuoteType } from "../types/QuoteType";
+import { QuoteCursorResponse, QuotePageResponse, QuoteResponse, QuoteType } from "../types/QuoteType";
 
 const URLS = {
     topQuotes: "top_quotes",
@@ -96,6 +96,35 @@ export const fetchQuotesByPage = async (page: number) => {
 
     } catch (error) {
         console.error("Error fetching quotes by page: ", error);
+        throw error;
+    }
+
+}
+
+/**
+ * This will get the cursor and by this cursor it will be fetching the next quotes
+ * from the server, this is the implementation of infinite scroll, where we will be
+ * fetching the next quotes as the user scrolls down the page, and we will be using
+ * the cursor to know where we are in the list of quotes, and to fetch the next quotes from the server.
+ * @param cursor - the cursor that we want to fetch the next quotes from, it will be passed as a query param
+ * in the API request to the server, and the server will return the next quotes for that cursor, and also
+ * the next cursor to fetch the next quotes in the next request
+ * @returns - the next quotes for the cursor that we want to fetch from the server, and also the next
+ * cursor to fetch the next quotes in the next request, or an error if the response from the server is not ok
+ */
+export const fetchQuotesByCursor = async (cursor: number) => {
+    try {
+
+        // posting to the server API
+        const response = await API.get<QuoteCursorResponse>(URLS.quotes, { params: { cursor } });
+
+        // loading the basic axios validations
+        BasicValidation.axiosValidatePost(response, URLS.quotes);
+
+        return response.data;
+
+    } catch (error) {
+        console.error("Error fetching quotes by cursor: ", error);
         throw error;
     }
 

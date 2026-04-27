@@ -14,3 +14,8 @@ export type QuotePageResponse = {
     quotes: QuoteType[];
     hasMore: boolean;
 };
+
+export type QuoteCursorResponse = {
+    quotes: QuoteType[];
+    nextCursor: number | null;
+};
