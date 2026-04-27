@@ -78,14 +78,59 @@ const abortableRequest = (fn: AxiosMethod) => {
     return executor;
 }
 
+/**
+ * This will be the source of adding the log of the API responses while
+ * we are getting an error, as we are getting a promisse catch to capture the error
+ * and will load things differently according with the existence of the NEXT_PUBLIC_REACT_APP_DEBUG_API env variable,
+ * so we can avoid log in production and have it in development when we need to debug something.
+ * @param promise - the promise returned by the API request, that we want to add the log in case of error
+ * @returns the same promise, but with the catch to log the error in case of it happens and the
+ * NEXT_PUBLIC_REACT_APP_DEBUG_API env variable is defined
+ */
+const withLog = <ResponseData>(promise: Promise<ResponseData>): Promise<ResponseData> =>
+    promise.catch( (error) => {
+
+        // if exist the process env NEXT_PUBLIC_REACT_APP_DEBUG_API, we log the error
+        if(!process.env.NEXT_PUBLIC_REACT_APP_DEBUG_API) throw error;
+
+        if (error.response){
+            // getting the data, status and statusText from the response to log it
+            const {data, status, statusText} = error.response;
+            console.log(data, status, statusText);
+
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.error("Error: ", error.message);
+        }
+        // console.log(error.config);
+        throw error;
+
+    });
+
 // defining the API object with the methods we want to use in our app
 const API = (axios: AxiosInstance) => {
     return {
-        get: (url: string, config = {}) => abortableRequest(axios.get)(url, config),
-        delete: (url: string, config = {}) => abortableRequest(axios.delete)(url, config),
-        post: (url: string, data: unknown, config = {}) => abortableRequest(axios.post)(url, data, config),
-        patch: (url: string, data: unknown, config = {}) => abortableRequest(axios.patch)(url, data, config),
-        put: (url: string, data: unknown, config = {}) => abortableRequest(axios.put)(url, data, config),
+        get: <ResponseData>(url: string, config = {}) =>
+            withLog<AxiosResponse<ResponseData>>(
+                abortableRequest(axios.get)(url, config)
+            ),
+        delete: <ResponseData>(url: string, config = {}) =>
+            withLog<AxiosResponse<ResponseData>>(
+                abortableRequest(axios.delete)(url, config)
+            ),
+        post: <ResponseData>(url: string, data: unknown, config = {}) =>
+            withLog<AxiosResponse<ResponseData>>(
+                abortableRequest(axios.post)(url, data, config)
+            ),
+        patch: <ResponseData>(url: string, data: unknown, config = {}) =>
+            withLog<AxiosResponse<ResponseData>>(
+                abortableRequest(axios.patch)(url, data, config)
+            ),
+        put: <ResponseData>(url: string, data: unknown, config = {}) =>
+            withLog<AxiosResponse<ResponseData>>(
+                abortableRequest(axios.put)(url, data, config)
+            ),
 
     }
 }
