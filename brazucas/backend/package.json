@@ -6,7 +6,9 @@
         "dev": "ts-node-dev --respawn --transpile-only server.ts"
     },
     "dependencies": {
+        "@types/cors": "^2.8.19",
         "axios": "^1.15.0",
+        "cors": "^2.8.6",
         "express": "^5.2.1",
         "next": "16.2.3"
     },

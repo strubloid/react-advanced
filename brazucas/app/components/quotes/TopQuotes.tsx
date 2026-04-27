@@ -70,7 +70,7 @@ const FetchTopQuotes = () => {
         isSuccess,
         isError,
     } = useQuery({
-        queryKey: ["top-quotes"],
+        queryKey: ["top_quotes"],
         queryFn: fetchTopQuotes,
     });
     console.log(quotes);
