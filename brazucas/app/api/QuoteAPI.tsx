@@ -38,13 +38,12 @@ export const fetchTopQuotes = async (config?: AbortableConfig) => {
  * @param quote
  * @returns
  */
-export const postQuote = async (quote: string) => {
+export const postQuote = async ({ quote, author }: { quote: string; author: string }) => {
     try {
 
         // posting to the server API
-        const response = await API.post<QuoteType>(URLS.postQuote, { quote });
-        console.log("POST response")
-        console.log(response)
+        const response = await API.post<QuoteType>(URLS.postQuote, { quote, author });
+
         // loading the basic axios validations
         BasicValidation.axiosValidatePost(response, URLS.postQuote);
 
@@ -66,8 +65,6 @@ export const resetQuotes = async () => {
 
         // resetting the quotes on the server
         const response = await API.post("/reset", {});
-        console.log("RESET response")
-        console.log(response)
         // loading the basic axios validations
         BasicValidation.axiosValidatePost(response, "/reset");
 

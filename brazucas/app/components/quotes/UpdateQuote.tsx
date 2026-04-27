@@ -36,13 +36,12 @@ const Label = styled.label``;
 
 const Input = styled.input``;
 
-const Button = styled.button`
-  type: ${(props) => props.type};
-  background-color: ${(props) => (props.isLoading ? "#CBD5E0" : "#4299E1")};
-  color: ${(props) => (props.isLoading ? "#A0AEC0" : "#fff")};
+const Button = styled.button<{ $isLoading?: boolean }>`
+  background-color: ${(props) => (props.$isLoading ? "#CBD5E0" : "#4299E1")};
+  color: ${(props) => (props.$isLoading ? "#A0AEC0" : "#fff")};
   padding: 12px 16px;
   border: none;
-  cursor: ${(props) => (props.isLoading ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.$isLoading ? "not-allowed" : "pointer")};
 `;
 
 export const UpdateQuote = () => {
@@ -99,15 +98,15 @@ export const UpdateQuote = () => {
     }
 
     // Reset the quotes to their original state on the server
-    const onReset = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onReset = async (event: React.MouseEvent<HTMLButtonElement>) => {
 
         // preventing double click
         event.preventDefault();
 
         // restarting the quote
-        await resetQuotesMutation.mutateAsync(e, {
+        await resetQuotesMutation.mutateAsync(undefined, {
             onSuccess: () => {
-                queryClient.invalidateQueries("top_quotes");
+                queryClient.invalidateQueries({ queryKey: ["top_quotes"] });
                 toast.success("Quote resetted.");
             },
         });
@@ -138,20 +137,20 @@ export const UpdateQuote = () => {
                 <div style={{ textAlign: "center" }}>
                     <Button
                         type="submit"
-                        isLoading={createQuoteMutation.isLoading}
-                        disabled={createQuoteMutation.isLoading}
+                        $isLoading={createQuoteMutation.isPending}
+                        disabled={createQuoteMutation.isPending}
                     >
-                        {createQuoteMutation.isLoading
+                        {createQuoteMutation.isPending
                             ? "Creating quote..."
                             : "Create quote"}
                     </Button>
                     <Button
                         type="button"
                         onClick={onReset}
-                        isLoading={resetQuotesMutation.isLoading}
-                        disabled={resetQuotesMutation.isLoading}
+                        $isLoading={resetQuotesMutation.isPending}
+                        disabled={resetQuotesMutation.isPending}
                     >
-                        {resetQuotesMutation.isLoading ? "Resetting..." : "Reset quotes"}
+                        {resetQuotesMutation.isPending ? "Resetting..." : "Reset quotes"}
                     </Button>
                 </div>
             </Form>
