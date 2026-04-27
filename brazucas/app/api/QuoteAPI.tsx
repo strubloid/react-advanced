@@ -1,6 +1,6 @@
 import API, { AbortableConfig } from "@app/api/Axios";
 import { BasicValidation } from "../services/BasicValidation";
-import { QuoteResponse, QuoteType } from "../types/QuoteType";
+import { QuotePageResponse, QuoteResponse, QuoteType } from "../types/QuoteType";
 
 const URLS = {
     topQuotes: "top_quotes",
@@ -74,3 +74,29 @@ export const resetQuotes = async () => {
         throw error;
     }
 };
+
+/**
+ * This will fetch the quotes by page from the server, and return them as an array of QuoteType.
+ * It will also handle any errors that may occur during the fetching process, and it will
+ * throw an error if the response from the server is not ok.
+ * @param page - the page number that we want to fetch the quotes from, it will be passed as a query param in the API request to the server,
+ * and the server will return the quotes for that page
+ * @returns an array of QuoteType, that will be the quotes for the page that we want to fetch from the server
+ */
+export const fetchQuotesByPage = async (page: number) => {
+    try {
+
+        // fetching quotes by page from the server API
+        const response = await API.get<QuotePageResponse>(URLS.quotes, { params: { page } });
+
+        // loading the basic axios validations
+        BasicValidation.axiosValidate(response, URLS.quotes);
+
+        return response.data;
+
+    } catch (error) {
+        console.error("Error fetching quotes by page: ", error);
+        throw error;
+    }
+
+}

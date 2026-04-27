@@ -9,3 +9,8 @@ export type QuoteFormType = Omit<QuoteType, "id">;
 export type QuoteResponse = {
     quotes: QuoteType[];
 };
+
+export type QuotePageResponse = {
+    quotes: QuoteType[];
+    hasMore: boolean;
+};
