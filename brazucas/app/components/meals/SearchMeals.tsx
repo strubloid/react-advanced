@@ -1,6 +1,9 @@
+'use client';
+
 import { didAbort } from "@/app/api/Axios";
 import { searchMeals } from "@/app/api/MealAPI";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { Meal } from "@/app/types/MealType";
 
 // loading the toastify library to show the error messages in a toast
 import { toast, ToastContainer } from "react-toastify";
@@ -10,13 +13,12 @@ import styled from "styled-components";
 // type for the abort ref that holds the cancel function
 type AbortRef = { abort?: () => void };
 
-export const useFetchMeals = (query: string) => {
+export const useFetchMeals = () => {
 
-    // const [meals, setMeals] = useState<Meal[]>([]);
-    const [meals, setMeals] = useState([]);
+    const [meals, setMeals] = useState<Meal[]>([]);
     const abortRef = useRef<AbortRef>({});
 
-    const handleQuoteError = (error: unknown) => {
+    const handleQuoteError = useCallback((error: unknown) => {
         if (didAbort(error)){
             // request aborted
             toast.error("Request aborted");
@@ -24,9 +26,9 @@ export const useFetchMeals = (query: string) => {
             // normal errors
             toast.error("Error fetching meals");
         }
-    }
+    }, []);
 
-    const fetchMeals = async (query: string) => {
+    const fetchMeals = useCallback(async (query: string) => {
 
         try {
 
@@ -45,7 +47,7 @@ export const useFetchMeals = (query: string) => {
             console.error(error);
             handleQuoteError(error);
         }
-    }
+    }, [handleQuoteError]);
 
     return {
         meals,
@@ -92,18 +94,18 @@ const MealContainer = styled.div`
   overflow-y: auto;
 `;
 
-const MealItem = styled.div`
+const MealItem = styled.div<{ 'data-odd': boolean }>`
   padding: 1px;
-  background-color: ${(props) => (props.odd ? "#815959" : "transparent")};
+  background-color: ${(props) => (props['data-odd'] ? "#815959" : "transparent")};
 `;
 
 export const SearchMeals = () => {
     const [query, setQuery] = useState("");
-    const { meals, fetchMeals } = useFetchMeals(query);
+    const { meals, fetchMeals } = useFetchMeals();
 
     useEffect (() => {
         fetchMeals(query);
-    }, [query]);
+    }, [query, fetchMeals]);
 
     return (
         <Container>
@@ -123,8 +125,8 @@ export const SearchMeals = () => {
             <div>
                 <Title>Meals</Title>
                 <MealContainer>
-                    {meals.map((meal, index) => (
-                        <MealItem odd={index % 2 !== 0} key={meal.idMeal}>
+                    {meals && meals.map((meal, index) => (
+                        <MealItem data-odd={index % 2 !== 0} key={meal.idMeal}>
                             <p>{meal.strMeal}</p>
                         </MealItem>
                     ))}

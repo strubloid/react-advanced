@@ -1,11 +1,12 @@
 import  API, { AbortableConfig }  from "@app/api/Axios";
 import { BasicValidation } from "../services/BasicValidation";
+import { Meal, MealResponse } from "../types/MealType";
 
 const URLS = {
     getMeal: "search.php",
 };
 
-export const searchMeals = async (query: string, config?: AbortableConfig) => {
+export const searchMeals = async (query: string, config?: AbortableConfig): Promise<Meal[]> => {
     try {
 
         // loading the response from the API using the get method of the API object,
@@ -23,7 +24,8 @@ export const searchMeals = async (query: string, config?: AbortableConfig) => {
         // loading the basic axios validations
         BasicValidation.axiosValidate(response, URLS.getMeal);
 
-        return response.data.meals;
+        const data = response.data as MealResponse;
+        return data.meals ?? [];
 
     } catch (error) {
         console.error("Error fetching meals: ", error);
