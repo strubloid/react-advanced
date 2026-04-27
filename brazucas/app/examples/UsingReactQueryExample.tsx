@@ -1,7 +1,8 @@
 import { JSX } from "react";
-import FetchTopQuotes from "../components/quotes/TopQuotes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
+import FetchTopQuotes from "../components/quotes/TopQuotes";
+import { UpdateQuote } from "../components/quotes/UpdateQuote";
 
 export const UsingReactQueryExample = (): JSX.Element => {
 
@@ -13,6 +14,8 @@ export const UsingReactQueryExample = (): JSX.Element => {
         // the context
         <QueryClientProvider client={queryClient}>
             <ToastContainer />
+
+            <UpdateQuote />
             <FetchTopQuotes />
         </QueryClientProvider>
     );

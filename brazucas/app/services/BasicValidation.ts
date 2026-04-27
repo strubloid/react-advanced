@@ -28,6 +28,29 @@ export class BasicValidation {
     }
 
     /**
+     * Validates an axios response from a POST request.
+     * Accepts any 2xx status code (200, 201 Created, 202 Accepted, etc.)
+     * @param response - the axios response to be validated
+     * @param endpoint - the endpoint to which the data was posted
+     */
+    static axiosValidatePost(response: AxiosResponse, endpoint: string): void {
+    // we check the response status is within the 2xx success range
+        if (response.status < 200 || response.status >= 300) {
+            throw new Error(`Failed to post data to ${endpoint}`);
+        }
+
+        // we check if the response data is not empty, if it is we throw an error
+        if (!response.data) {
+            throw new Error(`Data from ${endpoint} is empty, or does not exist`);
+        }
+
+        // we check if the response data is a json object, if it is not we throw an error
+        if (typeof response.data !== "object") {
+            throw new Error(`Data from ${endpoint} is not a valid JSON object`);
+        }
+    }
+
+    /**
      * Checks whether a value is considered empty, covering all common cases:
      *
      * - null / undefined

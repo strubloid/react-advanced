@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 // defining the default params for the axios instance
 const AxiosParams = {
     baseURL : process.env.NEXT_PUBLIC_NODE_ENV === "development" ? process.env.NEXT_PUBLIC_BACKEND_URL : "/",
-    timeout: 1000,
+    timeout: 5000,
 };
 
 // console.log("AxiosParams: ", AxiosParams);

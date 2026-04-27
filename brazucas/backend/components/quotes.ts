@@ -86,8 +86,9 @@ router.get("/", async (request, response) => {
     }
 });
 
-router.post("/", async (request, response) => {
+router.post("/add_quote", async (request, response) => {
     try {
+        console.log("BACKEND!")
         const { quote, author } = request.body;
         if (!quote || !author) {
             response.status(400).send("Please provide author and quote text.");

@@ -1,9 +1,10 @@
 import API, { AbortableConfig } from "@app/api/Axios";
 import { BasicValidation } from "../services/BasicValidation";
-import { QuoteResponse } from "../types/QuoteType";
+import { QuoteResponse, QuoteType } from "../types/QuoteType";
 
 const URLS = {
     topQuotes: "top_quotes",
+    postQuote: "add_quote",
     quotes: "",
 };
 
@@ -28,6 +29,51 @@ export const fetchTopQuotes = async (config?: AbortableConfig) => {
 
     } catch (error) {
         console.error("Error fetching top quotes: ", error);
+        throw error;
+    }
+};
+
+/**
+ *
+ * @param quote
+ * @returns
+ */
+export const postQuote = async (quote: string) => {
+    try {
+
+        // posting to the server API
+        const response = await API.post<QuoteType>(URLS.postQuote, { quote });
+        console.log("POST response")
+        console.log(response)
+        // loading the basic axios validations
+        BasicValidation.axiosValidatePost(response, URLS.postQuote);
+
+        return response.data;
+    } catch (error) {
+        console.error("Error posting quote: ", error);
+        throw error;
+    }
+};
+
+/**
+ *  This will reset the quotes on the server, and return the response from the server, that will be the new quotes
+ *  data after the reset.
+ * @returns the new quotes data after the reset, that will be an array of QuoteType, or an error if the response
+ * from the server is not ok
+ */
+export const resetQuotes = async () => {
+    try {
+
+        // resetting the quotes on the server
+        const response = await API.post("/reset", {});
+        console.log("RESET response")
+        console.log(response)
+        // loading the basic axios validations
+        BasicValidation.axiosValidatePost(response, "/reset");
+
+        return response.data;
+    } catch (error) {
+        console.error("Error resetting quotes: ", error);
         throw error;
     }
 };

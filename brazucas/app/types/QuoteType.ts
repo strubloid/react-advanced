@@ -4,6 +4,8 @@ export type QuoteType = {
     author: string;
 };
 
+export type QuoteFormType = Omit<QuoteType, "id">;
+
 export type QuoteResponse = {
     quotes: QuoteType[];
 };
