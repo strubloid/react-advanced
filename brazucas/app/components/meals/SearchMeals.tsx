@@ -1,60 +1,10 @@
-'use client';
-
-import { didAbort } from "@/app/api/Axios";
-import { searchMeals } from "@/app/api/MealAPI";
-import { useEffect, useRef, useState, useCallback } from "react";
-import { Meal } from "@/app/types/MealType";
+import { useEffect, useState } from "react";
 
 // loading the toastify library to show the error messages in a toast
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
-
-// type for the abort ref that holds the cancel function
-type AbortRef = { abort?: () => void };
-
-export const useFetchMeals = () => {
-
-    const [meals, setMeals] = useState<Meal[]>([]);
-    const abortRef = useRef<AbortRef>({});
-
-    const handleQuoteError = useCallback((error: unknown) => {
-        if (didAbort(error)){
-            // request aborted
-            toast.error("Request aborted");
-        } else {
-            // normal errors
-            toast.error("Error fetching meals");
-        }
-    }, []);
-
-    const fetchMeals = useCallback(async (query: string) => {
-
-        try {
-
-            // aborting the previous request if it exists
-            abortRef?.current?.abort?.();
-
-            // fetching the meals using the searchMeals function
-            const meals = await searchMeals(query, {
-                abort : (abort: () => void) => (abortRef.current.abort = abort)
-            });
-
-            // setting the meals in the state
-            setMeals(meals ?? []);
-
-        } catch (error) {
-            console.error(error);
-            handleQuoteError(error);
-        }
-    }, [handleQuoteError]);
-
-    return {
-        meals,
-        fetchMeals
-    };
-
-}
+import { useFetchMeals } from "./hooks/useFetchMeals";
 
 // second component to show the meals search, using the useFetchMeals hook
 const Container = styled.div`
