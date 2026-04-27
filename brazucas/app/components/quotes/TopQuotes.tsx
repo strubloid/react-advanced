@@ -73,7 +73,6 @@ const FetchTopQuotes = () => {
         queryKey: ["top_quotes"],
         queryFn: fetchTopQuotes,
     });
-    console.log(quotes);
 
     return (
         <Container>
