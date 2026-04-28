@@ -8,6 +8,9 @@ const URLS = {
     quotes: "",
 };
 
+const sleep = (time = 1000) =>
+    new Promise((resolve) => setTimeout(resolve, time));
+
 /**
  * This will fetch the top quotes from the server, and return them as an array of QuoteType.
  * It will also handle any errors that may occur during the fetching process, and it will
@@ -18,6 +21,8 @@ const URLS = {
  */
 export const fetchTopQuotes = async (config?: AbortableConfig) => {
     try {
+
+        await sleep();
 
         // loading the response from the API using the get method of the API object,
         const response = await API.get<QuoteResponse>(URLS.topQuotes, { ...config });
