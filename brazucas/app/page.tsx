@@ -9,6 +9,7 @@ import { CustomHookExample } from "./examples/CustomHookExample";
 import { UsingReactQueryExample } from "./examples/UsingReactQueryExample";
 import { InfiniteScrollExample } from "./examples/InfiniteScrollExample";
 import { QueryCancelationWithAbortSignalExample } from "./examples/QueryCancelationWithAbortSignalExample";
+import { StateManagementPatternsExample } from "./examples/StateManagementPatternsExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -20,7 +21,9 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <QueryCancelationWithAbortSignalExample />
+                <StateManagementPatternsExample />
+
+                {/* <QueryCancelationWithAbortSignalExample /> */}
 
                 {/* <InfiniteScrollExample /> */}
 
