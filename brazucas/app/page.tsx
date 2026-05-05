@@ -13,6 +13,7 @@ import { StateManagementPatternsExample } from "./examples/StateManagementPatter
 import { ShoppingListExample } from "./examples/ShoppingListExample";
 import { CodeSplitingAndLazyLoadingExample } from "./examples/CodeSplitingAndLazyLoadingExample";
 import { UseCallbackToPreserveRefentialIntegrityExample } from "./examples/UseCallbackToPreserveRefentialIntegrityExample";
+import { TrackMouseExample } from "./examples/TrackMouseExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -24,7 +25,9 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <UseCallbackToPreserveRefentialIntegrityExample />
+                <TrackMouseExample />
+
+                {/* <UseCallbackToPreserveRefentialIntegrityExample /> */}
 
                 {/* <CodeSplitingAndLazyLoadingExample /> */}
 
