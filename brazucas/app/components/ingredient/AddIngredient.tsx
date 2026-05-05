@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const StyledFieldset = styled.fieldset`
@@ -28,13 +29,17 @@ const StyledButton = styled.button`
 
 type AddIngredientProps = {
     addIngredient: (ingredient: string) => void;
-    ingredient: string;
-    setIngredient: (ingredient: string) => void;
 };
 
 const AddIngredient = (props: AddIngredientProps) => {
+
     console.log("AddIngredient rendered");
-    const { addIngredient, ingredient, setIngredient } = props;
+
+    // we get the ingredient state inside of this component
+    const [ingredient, setIngredient] = useState("");
+
+    // load the addIngredient from the props
+    const { addIngredient } = props;
 
     return (
         <form className="">
