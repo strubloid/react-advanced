@@ -4,6 +4,7 @@ import ShoppingListRow from "./Row";
 import styled from "styled-components";
 import { State } from "./types/StateType";
 import { Action, ShoppingPayload } from "./types/ActionType";
+import { useImmerReducer } from "use-immer";
 
 const StyledContainer = styled.div`
   padding-top: 2rem;
@@ -72,36 +73,66 @@ const shoppingItems: ShoppingItems = {
 const reducer = (state: State, action: Action): State => {
     switch (action.type) {
         case "UPDATE_NEW_SHOPPING_ITEM_NAME":
-            return {
-                ...state,
-                newShoppingItemName: action.payload,
-            };
+
+            // we replace this approach!
+            // return {
+            //     ...state,
+            //     newShoppingItemName: action.payload,
+            // };
+
+            // we just pass the property and the value to update, and let immer handle the immutability
+            state.newShoppingItemName = action.payload;
+
+            break;
+
         case "ADD_ITEM":
-            return {
-                ...state,
-                newShoppingItemName: "",
-                items: [...state.items, action.payload],
-            };
+
+            // we replace this approach!
+            // return {
+            //     ...state,
+            //     newShoppingItemName: "",
+            //     items: [...state.items, action.payload],
+            // };
+
+            // set the name to empty and pushing the action payload
+            state.newShoppingItemName = "";
+            state.items.push(action.payload);
+            break;
+
         case "UPDATE_ITEM":
-            return {
-                ...state,
-                items: state.items.map((item, idx) => 
-                    idx === action.payload.index ? action.payload.item : item
-                ),
-            };
+
+            // we replace this approach to:
+            // return {
+            //     ...state,
+            //     items: state.items.map((item, idx) => {
+            //         if (idx === action.payload.index) {
+            //             return action.payload.item;
+            //         }
+            //         return item;
+            //     }),
+            // };
+
+            // we just splice the item in the index with the new item, and let immer handle the immutability
+            state.items.splice(action.payload.index, 1, action.payload.item);
+            break;
+
         case "DELETE_ITEM":
-            return {
-                ...state,
-                items: state.items.filter((_, idx) => idx !== action.payload.index),
-            };
-        default:
-            return state;
+            // return {
+            //     ...state,
+            //     items: state.items.filter((_, idx) => idx !== action.payload.index),
+            // };
+
+            // we just splice the item in the index, and let immer handle the immutability
+            state.items.splice(action.payload.index, 1);
+            break;
     }
+
+    return state;
 };
 
 const ShoppingList = (props : unknown) => {
 
-    const [shoppingList, dispatch] = useReducer(reducer, shoppingItems);
+    const [shoppingList, dispatch] = useImmerReducer(reducer, shoppingItems);
 
     const addItem = () => {
         if (!shoppingList.newShoppingItemName) return;

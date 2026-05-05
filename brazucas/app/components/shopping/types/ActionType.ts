@@ -2,7 +2,7 @@ export type ShoppingItem = { id: string; name: string };
 
 export type ShoppingPayload = {
     index: number;
-    item?: ShoppingItem;
+    item: ShoppingItem;
 };
 
 export type Action =
