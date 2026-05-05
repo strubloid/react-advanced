@@ -1,8 +1,7 @@
 "use client";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
-// Lazy load Contact component from views/examples/contact/Contact.tsx
 const Contact = dynamic(() => import("@components/CodeSplitingAndLazyLoading/Contact"), { ssr: false });
 
 export default function ExamplesContactPage() {
@@ -13,5 +12,5 @@ export default function ExamplesContactPage() {
         return () => clearTimeout(timer);
     }, []);
 
-    return show ? <Contact /> : null;
+    return show ? <Contact /> : <h3>Loading Contact...</h3>;
 }
