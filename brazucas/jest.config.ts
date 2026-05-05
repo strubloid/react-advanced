@@ -12,6 +12,7 @@ const config: Config = {
         "^@examples/(.*)$": "<rootDir>/app/examples/$1",
         "^@app/(.*)$": "<rootDir>/app/$1",
         "^@/(.*)$": "<rootDir>/$1",
+        "^@views/(.*)$": "<rootDir>/app/(views)/$1",
     },
 };
 
