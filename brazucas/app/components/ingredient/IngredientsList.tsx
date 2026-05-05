@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { memo } from "react";
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -50,4 +51,40 @@ const IngredientsList = (props: IngredientsListProps) => {
     );
 };
 
-export default IngredientsList;
+type AreIngredientsEqual = (
+    prevProps: IngredientsListProps,
+    nextProps: IngredientsListProps
+) => boolean;
+
+/**
+ * This will check if ingredients changed or nor before we try to re-render a component.
+ * @param prevProps previous props of the component
+ * @param nextProps next props of the component
+ * @returns boolean indicating whether the ingredients are equal or not
+ */
+const areIngredientsEqual: AreIngredientsEqual = (prevProps, nextProps) => {
+    return prevProps.ingredients === nextProps.ingredients;
+}
+
+// now memo will be checking if the ingredients array reference changed or not.
+export default memo(IngredientsList, areIngredientsEqual);
+
+// export default IngredientsList;
+// Ingredient rendered
+// Ingredients.tsx:75 createIngredientsHeaderText called
+// IngredientsInfoHelper.tsx:13 IngredientsInfoHelper rendered
+// IngredientsList.tsx:36 IngredientsList rendered
+// AddIngredient.tsx:36 AddIngredient rendered
+
+// Ingredient rendered
+// Ingredients.tsx:75 createIngredientsHeaderText called
+// IngredientsInfoHelper.tsx:13 IngredientsInfoHelper rendered
+// IngredientsList.tsx:36 IngredientsList rendered  **** after memo, still existed
+// AddIngredient.tsx:36 AddIngredient rendered
+
+// after the areIndredientsEqual Function you can see the ingredients component isnt re-rendered.
+// Ingredient rendered
+// Ingredients.tsx:75 createIngredientsHeaderText called
+// IngredientsInfoHelper.tsx:13 IngredientsInfoHelper rendered
+
+// AddIngredient.tsx:36 AddIngredient rendered
