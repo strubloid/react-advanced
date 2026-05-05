@@ -66,8 +66,10 @@ const areIngredientsEqual: AreIngredientsEqual = (prevProps, nextProps) => {
     return prevProps.ingredients === nextProps.ingredients;
 }
 
+export default memo(IngredientsList);
+
 // now memo will be checking if the ingredients array reference changed or not.
-export default memo(IngredientsList, areIngredientsEqual);
+// export default memo(IngredientsList, areIngredientsEqual);
 
 // export default IngredientsList;
 // Ingredient rendered

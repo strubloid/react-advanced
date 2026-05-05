@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { nanoid } from "nanoid";
 import styled from "styled-components";
 import IngredientsList from "./IngredientsList";
@@ -67,9 +67,24 @@ const Ingredients = (props : unknown) => {
         ]);
     };
 
-    const deleteIngredient = (id: string) => {
+    // we will change the delete function to use a hook
+    // const deleteIngredient = (id: string) => {
+    //     setIngredientsCollection((ingredients) => ingredients.filter((ing) => ing.id !== id));
+    // };
+
+    /**
+     * Just by usin the useCallback we are able to
+     * Ingredient rendered
+     * Ingredients.tsx:80 createIngredientsHeaderText called
+     * IngredientsInfoHelper.tsx:13 IngredientsInfoHelper rendered
+     *
+     * () does not load the IngredientsList
+     *
+     * AddIngredient.tsx:36 AddIngredient rendered
+     **/
+    const deleteIngredient = useCallback((id: string) => {
         setIngredientsCollection((ingredients) => ingredients.filter((ing) => ing.id !== id));
-    };
+    }, []);
 
     const createIngredientsHeaderText = () => {
         console.log("createIngredientsHeaderText called");
