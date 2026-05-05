@@ -16,6 +16,7 @@ if (fs.existsSync(envPath)) {
 }
 
 const nextConfig: NextConfig = {
+    reactStrictMode: false,
     devIndicators: false,
     compiler: {
         styledComponents: true,
