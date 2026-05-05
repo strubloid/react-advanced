@@ -12,6 +12,7 @@ import { QueryCancelationWithAbortSignalExample } from "./examples/QueryCancelat
 import { StateManagementPatternsExample } from "./examples/StateManagementPatternsExample";
 import { ShoppingListExample } from "./examples/ShoppingListExample";
 import { CodeSplitingAndLazyLoadingExample } from "./examples/CodeSplitingAndLazyLoadingExample";
+import { UseCallbackToPreserveRefentialIntegrityExample } from "./examples/UseCallbackToPreserveRefentialIntegrityExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -23,7 +24,9 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <CodeSplitingAndLazyLoadingExample />
+                <UseCallbackToPreserveRefentialIntegrityExample />
+
+                {/* <CodeSplitingAndLazyLoadingExample /> */}
 
                 {/* <ShoppingListExample /> */}
 
