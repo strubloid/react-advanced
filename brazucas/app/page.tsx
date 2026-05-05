@@ -11,6 +11,7 @@ import { InfiniteScrollExample } from "./examples/InfiniteScrollExample";
 import { QueryCancelationWithAbortSignalExample } from "./examples/QueryCancelationWithAbortSignalExample";
 import { StateManagementPatternsExample } from "./examples/StateManagementPatternsExample";
 import { ShoppingListExample } from "./examples/ShoppingListExample";
+import { CodeSplitingAndLazyLoadingExample } from "./examples/CodeSplitingAndLazyLoadingExample";
 
 // creating an event emitter to be used in the observer pattern example
 export const emitter = mitt();
@@ -22,7 +23,9 @@ export default function Home() {
 
             <ErrorBoundry fallback={(error) => <ErrorFallback error={error} />}>
 
-                <ShoppingListExample />
+                <CodeSplitingAndLazyLoadingExample />
+
+                {/* <ShoppingListExample /> */}
 
                 {/* <StateManagementPatternsExample /> */}
 
