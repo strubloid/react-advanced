@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import LazyLoader from "@/app/components/CodeSplitingAndLazyLoading/LazyLoader";
 
 const AppContainer = styled.div`
   margin: 0 auto;
@@ -36,7 +37,7 @@ export default function ExamplesLayout({ children }: { children: React.ReactNode
                     <Link href="/examples/contact">Contact</Link>
                 </Nav>
             </NavContainer>
-            <Suspense fallback={<h3>Loading...</h3>}>
+            <Suspense fallback={<LazyLoader show={false} delay={500} />}>
                 {children}
             </Suspense>
         </AppContainer>
