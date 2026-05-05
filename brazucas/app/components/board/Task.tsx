@@ -1,6 +1,7 @@
 import { boardData } from "@/app/data/BoardData";
 import { useState } from "react";
 import styled from "styled-components";
+import { useImmer } from "use-immer";
 
 const Container = styled.div`
   padding: 2rem 0;
@@ -83,7 +84,10 @@ type TaskProps = {
 export const TaskBoard = () => {
 
     // loading the board data from the BoardData file
-    const [board, setBoard] = useState<typeof boardData>(boardData);
+    // const [board, setBoard] = useState<typeof boardData>(boardData);
+
+    // we update to userImmer when we have those cases of chain updates, allows us to mutate objects and arrays
+    const [board, setBoard] = useImmer<typeof boardData>(boardData);
 
     // the current selected task, this will be showing the data of it
     const [selectedTask, setSelectedTask] = useState<TaskProps | null>(null);
@@ -111,33 +115,29 @@ export const TaskBoard = () => {
         // destructing the columnIndex and taskIndex from the selectedTask state
         const { columnIndex, taskIndex } = selectedTask;
 
-        // updating the board state
+        // updating the task name directly in the board state using useImmer,
+        // we can mutate the state directly without worrying about immutability
         setBoard((board) => {
-            return {
-                ...board,
-                columns: [
-                    ...board.columns.map((column, colIndex) => {
-                        if(columnIndex !== colIndex){
-                            return column;
-                        }
-                        return {
-                            ...column,
-                            tasks: column.tasks.map((task, taskId) => {
-                                if(taskIndex !== taskId){
-                                    return task;
-                                }
-                                return {
-                                    ...task,
-                                    name: e.target.value,
-                                };
-                            })
-                        }
+            board.columns[columnIndex].tasks[taskIndex].name = e.target.value;
+        });
 
-                    })
-                ]
-            }
+        // // updating the board state
+        // setBoard((board) => {
 
-        })
+        //     // step 1: update the tasks in the target column
+        //     const updatedTasks = board.columns[columnIndex].tasks.map((task, taskId) =>
+        //         taskId === taskIndex ? { ...task, name: e.target.value } : task
+        //     );
+
+        //     // step 2: update the target column with the new tasks
+        //     const updatedColumns = board.columns.map((column, colIndex) =>
+        //         colIndex === columnIndex ? { ...column, tasks: updatedTasks } : column
+        //     );
+
+        //     // step 3: return the new board with the updated columns
+        //     return { ...board, columns: updatedColumns };
+
+        // })
 
     }
 
