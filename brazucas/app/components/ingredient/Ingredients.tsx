@@ -55,10 +55,10 @@ const initialIngredients: IngredientsProps[] = [
 const Ingredients = (props : unknown) => {
     console.log("Ingredient rendered");
     const [ingredient, setIngredient] = useState("");
-    const [ingredients, setIngredients] = useState<IngredientsProps[]>(initialIngredients);
+    const [ingredientCollection, setIngredientsCollection] = useState<IngredientsProps[]>(initialIngredients);
 
     const addIngredient = (ingredient: string) => {
-        setIngredients((ingredients) => [
+        setIngredientsCollection((ingredients) => [
             ...ingredients,
             {
                 name: ingredient,
@@ -68,12 +68,12 @@ const Ingredients = (props : unknown) => {
     };
 
     const deleteIngredient = (id: string) => {
-        setIngredients((ingredients) => ingredients.filter((ing) => ing.id !== id));
+        setIngredientsCollection((ingredients) => ingredients.filter((ing) => ing.id !== id));
     };
 
     const createIngredientsHeaderText = () => {
         console.log("createIngredientsHeaderText called");
-        return <StyledHeading2>Ingredients ({ingredients.length})</StyledHeading2>;
+        return <StyledHeading2>Ingredients ({ingredientCollection.length})</StyledHeading2>;
     };
 
     return (
@@ -85,7 +85,7 @@ const Ingredients = (props : unknown) => {
 
             <StyledSpaceY4>
                 <IngredientsList
-                    ingredients={ingredients}
+                    ingredients={ingredientCollection}
                     deleteIngredient={deleteIngredient}
                 />
 
