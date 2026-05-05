@@ -1,11 +1,14 @@
 import { searchMeals } from "@app/api/MealAPI";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { debounce } from "./debounce";
 import { Meal } from "@/app/types/MealType";
 
 const Search = () => {
     const [query, setQuery] = useState("");
     const [meals, setMeals] = useState<Meal[]>([]);
+
+    // using useMemo to create a debounced version of the search
+    // function that will only be created once
     const initSearchApiRequest = useMemo(() => {
         return debounce(async (q : string) => {
             setMeals(await searchMeals(q));
