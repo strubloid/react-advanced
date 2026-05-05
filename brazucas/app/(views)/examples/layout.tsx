@@ -1,4 +1,6 @@
 // /app/examples/layout.tsx
+
+import { Suspense } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
@@ -34,7 +36,9 @@ export default function ExamplesLayout({ children }: { children: React.ReactNode
                     <Link href="/examples/contact">Contact</Link>
                 </Nav>
             </NavContainer>
-            <div>{children}</div>
+            <Suspense fallback={<h3>Loading...</h3>}>
+                {children}
+            </Suspense>
         </AppContainer>
     );
 }
