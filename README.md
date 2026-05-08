@@ -79,3 +79,20 @@ They are focused on organizing other components within a web page. They are resp
 
 1. Create a new React project using `create-react-app` (npx create-next-app@latest).
 2. Install jest as test library (npm install jest).
+
+
+
+
+
+## Design system
+- Accessibility
+- Consistency
+- Frequent Updates
+- OnBoarding
+- Speed
+
+## dawback of Design Systems
+- Time
+- Evolution
+- Maintenance
+- Investiment

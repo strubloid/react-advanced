@@ -40,7 +40,7 @@ export const fetchTopQuotes = async (config?: AbortableConfig) => {
 
 /**
  *
- * @param quote
+ * @param {object} payload - object containing quote and author
  * @returns
  */
 export const postQuote = async ({ quote, author }: { quote: string; author: string }) => {
